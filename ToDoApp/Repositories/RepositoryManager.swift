@@ -8,7 +8,10 @@
 import Foundation
 
 final class RepositoryManager {
-    static func make() -> Repository {
-        RepositoryImplementation()
+    
+    static let shared = RepositoryManager()
+    
+    func getTaskRepository() -> TaskRepository {
+        return CoreDataTaskRepository()
     }
 }

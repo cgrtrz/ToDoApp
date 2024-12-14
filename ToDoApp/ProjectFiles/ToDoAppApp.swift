@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct ToDoAppApp: App {
@@ -15,6 +16,7 @@ struct ToDoAppApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            TaskListView(isOn: true)
         }
     }
 }

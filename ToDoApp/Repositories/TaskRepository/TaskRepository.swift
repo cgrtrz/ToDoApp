@@ -12,9 +12,9 @@ import Foundation
 ///Regardless of the source, processes data by means of pre-defined functions.
 protocol TaskRepository {
     
-    func getTasks(type: TaskListType) async throws -> [ToDoTask]
-    func addTask(_ task: ToDoTask) async throws
-    func updateTask(_ task: ToDoTask) async throws
-    func deleteTask(_ task: ToDoTask) async throws
+    func getTasks(type: TaskListType) async throws -> [Any]
+    func addTask(_ task: ToDoTask_) async throws
+    func updateTask(_ task: ToDoTask_) async throws
+    func deleteTask(_ task: ToDoTask_) async throws
     
 }

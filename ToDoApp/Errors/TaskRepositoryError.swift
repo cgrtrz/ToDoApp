@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+enum TaskRepositoryError: String, Error {
+    case taskNotFound = "Task not found..."
+    case badRequest = "Bad request..."
+}
