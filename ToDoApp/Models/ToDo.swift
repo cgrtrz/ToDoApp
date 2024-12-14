@@ -7,16 +7,23 @@
 
 import Foundation
 
-struct ToDoTask_ : Identifiable, Equatable, Hashable {
-    let id: UUID
+struct ToDo : Identifiable, Equatable, Hashable {
+    var id: UUID
     var title: String
-    let description_: String
-    let creationDate: TimeInterval
+    var description_: String
+    var creationDate: TimeInterval
     var dueDate: TimeInterval?
     var isCompleted: Bool = false
     
     //MARK: - TEST COMMENT
-    init(id: UUID, title: String, description: String, creationDate: TimeInterval, dueDate: TimeInterval, isCompleted: Bool) {
+    init(
+        id: UUID,
+        title: String,
+        description: String,
+        creationDate: TimeInterval,
+        dueDate: TimeInterval,
+        isCompleted: Bool
+    ) {
         self.id = id
         self.title = title
         self.description_ = description
@@ -24,7 +31,12 @@ struct ToDoTask_ : Identifiable, Equatable, Hashable {
         self.dueDate = dueDate
         self.isCompleted = isCompleted
     }
-    init(title: String, description: String, creationDate: TimeInterval, dueDate: TimeInterval?) {
+    init(
+        title: String,
+        description: String,
+        creationDate: TimeInterval,
+        dueDate: TimeInterval?
+    ) {
         self.id = UUID()
         self.title = title
         self.description_ = description

@@ -12,6 +12,6 @@ final class RepositoryManager {
     static let shared = RepositoryManager()
     
     func getTaskRepository() -> TaskRepository {
-        return CoreDataTaskRepository()
+        return CoreDataToDoRepository()
     }
 }

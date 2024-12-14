@@ -16,37 +16,9 @@ import Foundation
 /// - Requires: nothing
 /// - Remark: very good struct
 /// - Important: really important
-final class TaskListRowViewModel : ObservableObject{
-    var task: ToDoTask_?
-    
-   
-    //MARK: - Updates Mock Data
-    /**
-     Updates Mock Data.
-     
-     # New item
-     
-     1. item
-     2. item
-     
-     - updates
-     - mock
-     - data
-     
-     ```
-     if (isAwesome){
-     return true
-     }
-     ```
-     
-     
-     
-     
-     
-     conclusion
-     - Parameter id: id is a `parameter`
-     */
-    
+final class ToDoRowViewModel : ObservableObject{
+    var task: ToDo?
+ 
     func updateMockData(id: UUID) {
         print("print......")
     }
