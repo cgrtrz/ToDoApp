@@ -9,15 +9,27 @@ import Foundation
 import SwiftUI
 
 
-struct CompletedTaskToggleStyle: ToggleStyle {
+struct ToDoToogleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         return HStack {
             Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "checkmark.circle")
                 .foregroundStyle(configuration.isOn ? Color.green : Color.gray)
-                .frame(width: 24, height:24)
+                .frame(width: 32, height:32)
                 .onTapGesture {
                     configuration.isOn.toggle()
                 }
+        }
+    }
+}
+
+struct CustomDatePicker: DatePickerStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        return HStack {
+            VStack {
+                Text("Custom Style")
+                DatePicker("MY CUSTOM DESIGN", selection: configuration.$selection)
+                    .foregroundStyle(Color.green)
+            }
         }
     }
 }

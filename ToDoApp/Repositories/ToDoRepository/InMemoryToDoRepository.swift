@@ -8,7 +8,7 @@
 import Foundation
 
 ///Creates dummy data in runtime memory.
-final class InMemoryToDoRepository: TaskRepository {
+final class InMemoryToDoRepository: ToDoRepository {
     
     private var toDos: [ToDo] = [
         ToDo(title: "Task 1", description: "Task 1 description", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970),

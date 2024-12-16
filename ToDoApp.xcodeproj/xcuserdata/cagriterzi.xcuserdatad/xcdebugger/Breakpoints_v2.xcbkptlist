@@ -82,36 +82,6 @@
             endingLineNumber = "43"
             landmarkName = "getArrayIndex(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0394C406-13DA-4821-9265-A29A5F82F676 - 91587b15fbe4b832"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ToDoApp.InMemoryTaskRepository.getArrayIndex(ToDoApp.ToDoTask) -&gt; Swift.Optional&lt;Swift.Int&gt;"
-                  moduleName = "ToDoApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cagriterzi/Documents/XCode/ToDoApp/ToDoApp/Repositories/TaskRepository/InMemoryTaskRepository.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43">
-               </Location>
-               <Location
-                  uuid = "0394C406-13DA-4821-9265-A29A5F82F676 - 59cc828cc224d8ec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (ToDoApp.ToDoTask) -&gt; Swift.Bool in ToDoApp.InMemoryTaskRepository.getArrayIndex(ToDoApp.ToDoTask) -&gt; Swift.Optional&lt;Swift.Int&gt;"
-                  moduleName = "ToDoApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cagriterzi/Documents/XCode/ToDoApp/ToDoApp/Repositories/TaskRepository/InMemoryTaskRepository.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,6 +129,38 @@
             startingLineNumber = "64"
             endingLineNumber = "64"
             landmarkName = "updateToDo(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A7FFBBD2-3F16-4579-A28E-E99772CFCB1C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoApp/ViewModels/EventManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "addToCalendar(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "63EF6916-5E8A-40EC-BC05-5B5BC65255FD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoApp/ViewModels/EventManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "addToCalendar(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

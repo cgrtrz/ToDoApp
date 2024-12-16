@@ -17,21 +17,23 @@ struct ToDoRowView: View {
     
     var body: some View {
         
+        
         HStack {
             Toggle("some text", isOn: $toDo.isCompleted)
-                .toggleStyle(CompletedTaskToggleStyle())
+                .toggleStyle(ToDoToogleStyle())
                 .onChange(of: toDo.isCompleted) { _, _ in
-        
+                    
                     //print("\(toDo.id.uuidString) state is  \(toDo.isCompleted)...")
                     dataManager.updateToDo(toDo)
                     
                 }
             Text(toDo.title)
                 .font(.headline)
+                .lineLimit(2)
                 .foregroundStyle(toDo.isCompleted ? Color.gray :Color.primary)
                 .strikethrough(toDo.isCompleted)
-                
-                
+            
+            
         }
         
         

@@ -11,7 +11,18 @@ final class RepositoryManager {
     
     static let shared = RepositoryManager()
     
-    func getTaskRepository() -> TaskRepository {
-        return CoreDataToDoRepository()
+    //Set ToDo repository to inject into the app.
+    private let repositoryType: RepositoryType = .coreData
+    
+    func getToDoRepository() -> ToDoRepository {
+        switch repositoryType {
+        case .inMemory:
+            return InMemoryToDoRepository()
+        case .mockedNetwork:
+            return MockedNetworkToDoRepository()
+        case .coreData:
+            return CoreDataToDoRepository()
+        }
+        
     }
 }

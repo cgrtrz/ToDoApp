@@ -10,7 +10,7 @@ import Foundation
 ///Works as an interface between data services and VievModels.
 ///
 ///Regardless of the source, processes data by means of pre-defined functions.
-protocol TaskRepository {
+protocol ToDoRepository {
     
     func getToDos(type: ToDoListType) async throws -> [ToDo]
     func addToDo(_ toDo: ToDo) async throws

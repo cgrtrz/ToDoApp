@@ -8,7 +8,7 @@
 import Foundation
 
 ///Mimicks network connection with 1 sec delays and provides dummy data.
-final class MockedNetworkToDoRepository: TaskRepository {
+final class MockedNetworkToDoRepository: ToDoRepository {
     
     
     private var toDos: [ToDo] = [

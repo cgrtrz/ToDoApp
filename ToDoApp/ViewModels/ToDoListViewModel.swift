@@ -31,7 +31,7 @@ final class ToDoListViewModel : ObservableObject {
     //let repository : TaskRepository
     var toDoListType: ToDoListType = .all
     
-    let repository = RepositoryManager.shared.getTaskRepository()
+    let repository = RepositoryManager.shared.getToDoRepository()
     
     
     init(){

@@ -16,7 +16,7 @@ import Foundation
  - Important: Add new case when new data source added.
  */
 enum RepositoryType {
-    case inMemoryRepository
-    case mockNetworkRepository
-    case coreDataRepository
+    case inMemory
+    case mockedNetwork
+    case coreData
 }

@@ -13,7 +13,7 @@ final class DataManager: ObservableObject {
     ///Dependency Injection
     ///
     ///`repository` calls `getTaskRepository()` method from `RepositoryManager` singleton where data soures are set.
-    private let repository = RepositoryManager.shared.getTaskRepository()
+    private let repository = RepositoryManager.shared.getToDoRepository()
     private var toDoListType: ToDoListType = .all
     private var type: ToDoListType = .all
     @Published var toDos: [ToDo] = []
@@ -65,7 +65,7 @@ final class DataManager: ObservableObject {
         }
     }
     
-    func deleteTask(_ toDo: ToDo) {
+    func deleteToDo(_ toDo: ToDo) {
         Task {
             try await repository.deleteToDo(toDo)
             getToDos(type)
