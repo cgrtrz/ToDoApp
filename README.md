@@ -1,13 +1,16 @@
-📌 Project Name
+# (D R A F T)
+# 📌  ToDo App
 
 Short and descriptive tagline or purpose of the project.
 
-🚀 Features
+This site was built using [GitHub Pages](https://pages.github.com/)
+
+## 🚀 Features
 	•	✅ Feature 1: Brief description of the feature.
 	•	✅ Feature 2: Brief description of the feature.
 	•	✅ Feature 3: Brief description of the feature.
 
-📂 Project Structure
+## 📂 Project Structure
 
 ProjectName/
 ├── Source/
@@ -17,19 +20,19 @@ ProjectName/
 ├── Resources/
 └── README.md
 
-💻 Technologies Used
+## 💻 Technologies Used
 	•	Language/Framework: (e.g., Swift, SwiftUI)
 	•	Database: (e.g., Core Data, Firebase)
 	•	Design Pattern: (e.g., MVVM, Repository Pattern)
 	•	Other Tools: (e.g., Combine, Alamofire, etc.)
 
-🛠️ Installation & Usage
+## 🛠️ Installation & Usage
 
-Prerequisites
+### Prerequisites
 	•	Install Xcode version XX.X or higher.
 	•	Swift version X.X or higher is required.
 
-Setup
+### Setup
 	1.	Clone the repository:
 
 git clone https://github.com/yourusername/projectname.git
@@ -39,17 +42,17 @@ cd projectname
 	2.	Open the .xcodeproj or .xcworkspace file in Xcode.
 	3.	Run the project on a simulator or connected device.
 
-🧪 Testing
+## 🧪 Testing
 
 To run the unit tests, use the following command in the Xcode terminal:
 
 xcodebuild test -scheme ProjectName -destination 'platform=iOS Simulator,name=iPhone 14'
 
-📜 Documentation
+## 📜 Documentation
 
 Refer to the Wiki for detailed guides and additional documentation.
 
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
 	1.	Fork the repository.
@@ -58,16 +61,16 @@ Contributions are welcome! Please follow these steps:
 	4.	Push the branch: git push origin feature-name.
 	5.	Open a pull request.
 
-🌟 Acknowledgments
+## 🌟 Acknowledgments
 	•	Special thanks to ContributorName for support.
 	•	Icons from FontAwesome.
 	•	[Other relevant resources].
 
-📃 License
+## 📃 License
 
 This project is licensed under the MIT License.
 
-📬 Contact
+## 📬 Contact
 
 For any inquiries or suggestions, feel free to contact me:
 	•	Email: your.email@example.com
