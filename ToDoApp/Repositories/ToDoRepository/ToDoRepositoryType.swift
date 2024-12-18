@@ -15,7 +15,7 @@ import Foundation
  - Author: Cagri Terzi
  - Important: Add new case when new data source added.
  */
-enum RepositoryType {
+enum ToDoRepositoryType {
     case inMemory
     case mockedNetwork
     case coreData
