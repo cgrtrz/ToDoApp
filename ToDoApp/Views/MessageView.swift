@@ -25,8 +25,10 @@ struct MessageView: View {
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         withAnimation {
-                            self.isVisible = false
-                            dismiss()
+                            //self.isVisible = false
+                            //dismiss()
+                            self.position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height + 500)
+                            //self.popover(isPresented: $isVisible, content: <#T##() -> View#>)
                         }
                     }
                 }

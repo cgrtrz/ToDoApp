@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum AuthenticationRepositoryType {
+    case mocked
+    case firebase
+    case apple
+}

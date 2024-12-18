@@ -21,12 +21,20 @@ struct AddToDoView: View {
     
     @State private var title: String = ""
     @State private var descr: String = ""
-    @State private var dueDate: Date = Date()
+    @State private var dueDate: Date = Date().addingTimeInterval(60 * 15)
     @State private var showingDatePicker: Bool = false
     @State private var addToCalendar: Bool = false
     @StateObject private var viewModel = AddToDoViewModel()
     @FocusState private var focus: FocusableField?
-    @Binding var showingMessage: Bool
+    @Binding var showingMessage: Bool {
+        didSet {
+            if showingMessage == true {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    showingMessage = false
+                }
+            }
+        }
+    }
     @Binding var message: String
     //@Binding var showAddTaskSheet: Bool
     
@@ -48,28 +56,35 @@ struct AddToDoView: View {
                         .lineLimit(6)
                         .fontWeight(.semibold)
                         .focused($focus, equals: .descr)
-                    if showingDatePicker == false {
-                        Toggle(isOn: $showingDatePicker)
-                            {
-                            Text("Set Due Date?")
-                                
-                        }
-                            .tint(.purple)
-                    } else  {
-                        DatePicker("Due Date", selection: $dueDate)
+                    Toggle(isOn: $showingDatePicker)
+                        {
+                        Text("Set Due Date?")
+                            
+                    }
+                        .tint(.purple)
+                    if showingDatePicker {
+                        DatePicker("Due Date", selection: $dueDate, in: Date().addingTimeInterval(60 * 15)...)
                             .datePickerStyle(.graphical)
                             .tint(.purple)
+                            .id(Date().addingTimeInterval(60 * 15))
                     }
                     Toggle("Add to calendar?", isOn: $addToCalendar)
                         .disabled(!showingDatePicker)
                         .tint(.purple)
                     Button {
-                        let newToDo = ToDo(id: UUID(),
-                                           title: title,
-                                           description: descr,
-                                           creationDate: Date().timeIntervalSince1970,
-                                           dueDate: dueDate.timeIntervalSince1970,
-                                           isCompleted: false)
+                        let newToDo: ToDo
+                        if showingDatePicker {
+                             newToDo = ToDo(id: UUID(),
+                                               title: title,
+                                               description: descr,
+                                               creationDate: Date().timeIntervalSince1970,
+                                            completionDate: 0,
+                                               dueDate: dueDate.timeIntervalSince1970,
+                                               isCompleted: false)
+                        } else {
+                            newToDo = ToDo(title: title, description: descr, creationDate: Date().timeIntervalSince1970)
+                        }
+                        
                         dataManager.addToDo(newToDo)
                         if addToCalendar {
                             do {
@@ -80,6 +95,7 @@ struct AddToDoView: View {
                         }
                             dismiss()
                         message = "Task added!"
+                        showingMessage = false
                         showingMessage = true
                         
                     } label : {
@@ -110,7 +126,7 @@ struct AddToDoView: View {
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(.white, .purple)
                                 .bold()
-                                .padding()
+                                //.padding()
                         }
                     }
                     

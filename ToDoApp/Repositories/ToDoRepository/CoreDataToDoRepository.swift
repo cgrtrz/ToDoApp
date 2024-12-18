@@ -31,6 +31,7 @@ final class CoreDataToDoRepository: ToDoRepository {
                          title: $0.title ?? "",
                          description: $0.description_ ?? "",
                          creationDate: TimeInterval($0.creationDate),
+                         completionDate: TimeInterval($0.completionDate),
                          dueDate: TimeInterval($0.dueDate),
                          isCompleted: $0.isCompleted) }
             }
@@ -62,6 +63,7 @@ final class CoreDataToDoRepository: ToDoRepository {
             do {
                 if let entity = try self.context.fetch(fetchRequest).first {
                     entity.isCompleted = toDo.isCompleted
+                    entity.completionDate = Int64(toDo.completionDate ?? 0)
                     self.saveContext()
                 }
             } catch {

@@ -2,11 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UILaunchScreen</key>
-	<dict/>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>App wants to access calendar.</string>
 	<key>NSRemindersFullAccessUsageDescription</key>
 	<string>App wants to access reminders.</string>
+	<key>UILaunchScreen</key>
+	<dict/>
 </dict>
 </plist>

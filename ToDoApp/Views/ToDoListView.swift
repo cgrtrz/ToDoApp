@@ -17,7 +17,16 @@ struct ToDoListView: View {
     @State var selectedItem: Int?
     @State private var showingAddToDoSheet = false
     @State private var showingSettingsSheet = false
-    @State var showingMessage = false
+    @State var showingMessage = false {
+        didSet {
+            if showingMessage == true {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    showingMessage = false
+                }
+            }
+        }
+    }
+    
     @State var message = ""
     
     var body: some View {
@@ -30,13 +39,13 @@ struct ToDoListView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                    Text("To-Do-Tasks")
+                    Text("To Do App")
                         .font(.largeTitle)
                         .bold()
                         .foregroundStyle(Theme.headerColor)
-                    Spacer()
+                    //Spacer()
                 }
-                .padding(Constants.pad)
+                .padding(.horizontal, 36)
                 Picker ("", selection: $showingToDos) {
                     ForEach(ToDoListType.allCases, id:\.self) { type in
                         Text(type.name).tag(type.rawValue)
@@ -49,42 +58,97 @@ struct ToDoListView: View {
                 
                 ZStack {
                     List {
-                        ForEach(dataManager.toDos, id: \.self) { toDo in
-                            NavigationLink {
-                                ToDoDetailView(toDo: toDo)
-                            } label: {
-                                ToDoRowView(toDo: toDo)
-                                    .swipeActions {
-                                        Button {
-                                            dataManager.deleteToDo(toDo)
-                                            message = "\(toDo.title) deleted"
-                                            withAnimation{
-                                                showingMessage = true
+                        if dataManager.toDos.contains(where: { $0.isCompleted == false }) {
+                            
+                       
+                        Section(header: Text("Active")) {
+                            ForEach(dataManager.toDos, id: \.self) { toDo in
+                                if !toDo.isCompleted {
+                                    NavigationLink {
+                                        ToDoDetailView(toDo: toDo)
+                                    } label: {
+                                        ToDoRowView(toDo: toDo)
+                                            .swipeActions {
+                                                Button {
+                                                    showingMessage = false
+                                                    dataManager.deleteToDo(toDo)
+                                                    message = "\(toDo.title) deleted"
+                                                    withAnimation{
+                                                        
+                                                        showingMessage = true
+                                                    }
+                                                }
+                                                label: {
+                                                    VStack {
+                                                        Image(systemName: "trash")
+                                                            .tint(.red)
+                                                        Text("Delete")
+                                                    }
+                                                }
+                                                Button {
+                                                    Task {
+                                                        //
+                                                    }
+                                                } label: {
+                                                    VStack {
+                                                        Image(systemName: "pencil")
+                                                            .tint(.blue)
+                                                        Text("Edit")
+                                                    }
+                                                }
                                             }
-                                        }
-                                        label: {
-                                            VStack {
-                                                Image(systemName: "trash")
-                                                    .tint(.red)
-                                                Text("Delete")
-                                            }
-                                        }
-                                        Button {
-                                            Task {
-                                                //
-                                            }
-                                        } label: {
-                                            VStack {
-                                                Image(systemName: "pencil")
-                                                    .tint(.blue)
-                                                Text("Edit")
-                                            }
-                                        }
                                     }
+                                }
+                                
                             }
                         }
-                        
-                        
+                        }
+                        if dataManager.toDos.contains(where: \.isCompleted) {
+                            
+                            
+                            Section(header: Text("Completed")) {
+                                ForEach(dataManager.toDos, id: \.self) { toDo in
+                                    if toDo.isCompleted {
+                                        NavigationLink {
+                                            ToDoDetailView(toDo: toDo)
+                                        } label: {
+                                            ToDoRowView(toDo: toDo)
+                                                .swipeActions {
+                                                    Button {
+                                                        showingMessage = false
+                                                        dataManager.deleteToDo(toDo)
+                                                        message = "\(toDo.title) deleted"
+                                                        withAnimation{
+                                                            
+                                                            showingMessage = true
+                                                        }
+                                                    }
+                                                    label: {
+                                                        VStack {
+                                                            Image(systemName: "trash")
+                                                                .tint(.red)
+                                                            Text("Delete")
+                                                        }
+                                                    }
+                                                    Button {
+                                                        Task {
+                                                            //
+                                                        }
+                                                    } label: {
+                                                        VStack {
+                                                            Image(systemName: "pencil")
+                                                                .tint(.blue)
+                                                            Text("Edit")
+                                                        }
+                                                    }
+                                                }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
                         
                         
                     }
@@ -102,6 +166,7 @@ struct ToDoListView: View {
                 }
                 .sheet(isPresented: $showingSettingsSheet) {
                     SettingsView()
+                    
                         .presentationDetents([.large])
                         .presentationDragIndicator(.visible)
                         .presentationCornerRadius(12)
@@ -154,9 +219,39 @@ struct ToDoListView: View {
                 }
             }
         }
+//        .modifier(Popup(isPresented: showingMessage, alignment: .bottom, content: {
+//            Color(.secondarySystemBackground)
+//                .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.085)
+//                .padding(.bottom, 65)
+//            
+//        }))
         .overlay {
-            MessageView(message: $message, isVisible: $showingMessage)
+            //showingMessage ? Color.red : Color.clear
+            if showingMessage {
+                withAnimation(.interactiveSpring()) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundStyle(Color(.secondarySystemBackground))
+                            
+                        Text(message)
+                    }.frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.085)
+                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 200)
+                    
+                }//.transition(.offset(x: 0, y: UIScreen.main.bounds.height + 500))
+                //.transition()
+            }
+            //if showingMessage {
+//                withAnimation{
+//                    MessageView(message: $message, isVisible: $showingMessage)
+//                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 700)
+//                        .popover(isPresented: $showingMessage) {
+//                            Text("popover")
+//                        }
+                    
+               // }
+            //}
         }
+        .accentColor(.purple)
     }
     
     func refreshToDos() {

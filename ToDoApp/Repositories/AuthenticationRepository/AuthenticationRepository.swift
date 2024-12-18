@@ -11,7 +11,7 @@ import Foundation
 
 protocol AuthenticationRepository {
     
-    func authenticateUser(username: String, password: String, completion: (Result<User, Error>))
+    func authenticateUser(username: String, password: String) -> Result<User, any Error>
     
     func validateUser(username: String, password: String) -> Bool
     
@@ -27,6 +27,11 @@ extension AuthenticationRepository {
 }
 
 final class A : AuthenticationRepository {
+    func authenticateUser(username: String, password: String) -> Result<User, any Error> {
+        //
+        return .success(User(username: ""))
+    }
+    
     func authenticateUser(username: String, password: String, completion: (Result<User, any Error>)) {
         //
     }

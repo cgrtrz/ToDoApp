@@ -16,7 +16,8 @@ struct ToDoAppApp: App {
         WindowGroup {
             //ContentView()
                 
-            ToDoListView(isOn: true)
+            //ToDoListView(isOn: true)
+            LoginView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(DataManager())
         }

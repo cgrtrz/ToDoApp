@@ -11,12 +11,12 @@ import Foundation
 final class InMemoryToDoRepository: ToDoRepository {
     
     private var toDos: [ToDo] = [
-        ToDo(title: "Task 1", description: "Task 1 description", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970),
-        ToDo(title: "Task 2", description: "Task 2 description", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970),
-        ToDo(title: "Task 3", description: "Task 3 description", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970),
-        ToDo(title: "Task 4", description: "Task 4 description", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970),
-        ToDo(title: "Task 5", description: "Task 5 description", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970),
-        ToDo(title: "Task 6", description: "Task 6 description", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970)]
+        ToDo(id: UUID(), title: "Task 1", description: "Task 1 description", creationDate: Date().timeIntervalSince1970, completionDate: 0, dueDate: 0, isCompleted: false),
+        ToDo(title: "Task 2", description: "Task 2 description", creationDate: Date().timeIntervalSince1970),
+        ToDo(id: UUID(), title: "Task 3", description: "Task 3 description", creationDate: Date().timeIntervalSince1970, completionDate: 0, dueDate: 0, isCompleted: true),
+        ToDo(title: "Task 4", description: "Task 4 description", creationDate: Date().timeIntervalSince1970),
+        ToDo(id: UUID(), title: "Task 5", description: "Task 5 description", creationDate: Date().timeIntervalSince1970, completionDate: 0, dueDate: 0, isCompleted: false),
+        ToDo(id: UUID(), title: "Task 6", description: "Task 6 description", creationDate: Date().timeIntervalSince1970, completionDate: 0, dueDate: 0, isCompleted: false)]
     
     func getToDos(type: ToDoListType) async throws -> [ToDo] {
         return toDos

@@ -13,7 +13,7 @@ final class AddToDoViewModel: ObservableObject {
     private let repository = RepositoryManager.shared.getToDoRepository()
     
     func addNewTask(title toDoTitle: String, description toDoDescription: String?, dueDate toDoDueDate: TimeInterval?) async {
-        toDo = ToDo(id: UUID(), title: toDoTitle, description: toDoDescription ?? "", creationDate: Date().timeIntervalSince1970, dueDate: Date().timeIntervalSince1970, isCompleted: false)
+        toDo = ToDo(id: UUID(), title: toDoTitle, description: toDoDescription ?? "", creationDate: Date().timeIntervalSince1970, completionDate: 0, dueDate: Date().timeIntervalSince1970, isCompleted: false)
         if let task = toDo {
             do {
                 try await repository.addToDo(task)
