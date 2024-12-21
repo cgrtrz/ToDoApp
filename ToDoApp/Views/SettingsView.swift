@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject var authManager: AuthenticationManager
+    
     var body: some View {
-        Text("Settings")
+        VStack{
+            Button {
+                authManager.isUserAuthenticated = .signedOut
+            } label: {
+                ZStack{
+                    RoundedRectangle(cornerRadius: 12)
+                        .frame(width: 280, height: 60)
+                        .foregroundStyle(.purple)
+                    Text("Sign out")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .bold()
+                        .padding(.horizontal, 8)
+                        .foregroundStyle(.white)
+                }
+            }
+        }
     }
 }
 

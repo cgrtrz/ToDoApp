@@ -38,7 +38,7 @@ struct ToDoListView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .clipShape(Circle())
                     Text("To Do App")
                         .font(.largeTitle)
                         .bold()
