@@ -11,18 +11,18 @@ import CoreData
 @main
 struct ToDoAppApp: App {
     let persistenceController = PersistenceController.shared
-    let authenticationManager = AuthenticationManager()
+    //let authenticationManager = AuthenticationManager()
     
     var body: some Scene {
         WindowGroup {
             //ContentView()
                 
-            //ToDoListView(isOn: true)
+            ToDoListView(isOn: true)
             
-            RootView()
+            //RootView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(DataManager())
-                .environmentObject(AuthenticationManager())
+                //.environmentObject(AuthenticationManager())
         }
     }
 }
