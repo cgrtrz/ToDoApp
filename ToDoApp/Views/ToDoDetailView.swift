@@ -13,6 +13,7 @@ struct ToDoDetailView: View {
     @State private var dueDate: Date = Date()
     @State private var isEditing: Bool = false
     @State private var date: Date = Date()
+    @State private var addToCalendar: Bool = false
     
     var body: some View {
         
@@ -28,6 +29,26 @@ struct ToDoDetailView: View {
                     TextField("Description", text: $toDo.description_, axis: .vertical)
                         .lineLimit(2...)
                     //Divider()
+                    if toDo.addedToCalendar {
+                        HStack {
+                            Image(systemName: "bell.fill")
+                                .foregroundStyle(.yellow)
+                                .foregroundStyle(Color.gray)
+                                .frame(width: 32, height:32)
+                            Text("Added to calendar")
+                                .font(.caption)
+                                .italic()
+                                .foregroundStyle(Color(.secondaryLabel))
+                            Spacer()
+                            Button("Remove") {
+                                //
+                            }
+                            .underline()
+                            .buttonStyle(.borderless)
+                            .tint(Color.red)
+                        }
+                    }
+                    
                     HStack {
                         Image(systemName: "pencil")
                             .foregroundStyle(Color.gray)
@@ -50,9 +71,9 @@ struct ToDoDetailView: View {
                     }
                 }
                 Section {
-                    if toDo.dueDate != 0
-                    {
+                    if toDo.dueDate != 0 {
                         HStack{
+                            Image(systemName: "calendar")
                             Text("Due date")
                             Spacer()
                             DatePicker("", selection: $date)
@@ -61,7 +82,19 @@ struct ToDoDetailView: View {
                                 .foregroundStyle(.red)
                                 .bold()
                         }
+                        if !toDo.addedToCalendar {
+                            HStack {
+                                Image(systemName: "bell.fill")
+                                    .foregroundStyle(.yellow)
+                                Text("Add to Calendar")
+                                Spacer()
+                                Toggle("", isOn: $addToCalendar)
+                                    .tint(.purple)
+                            }
+                        }
                     }
+                    
+                    
                 }
                 Section {
                     Button {
@@ -80,7 +113,11 @@ struct ToDoDetailView: View {
                 }
             }.onAppear{
                 date = Date(timeIntervalSince1970: toDo.dueDate ?? 0)
+                    
             }
+            
+            .navigationBarTitleDisplayMode(.inline)
+            
             
             
 //            
@@ -170,6 +207,19 @@ struct ToDoDetailView: View {
 //                }
 //            }
             Spacer()
+        }
+        .ignoresSafeArea()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    //TODO: Delete ToDo
+                } label: {
+                    HStack {
+                        Text("Delete")
+                        Image(systemName: "trash.fill")
+                    }.foregroundStyle(.red)
+                }
+            }
         }
     }
 }

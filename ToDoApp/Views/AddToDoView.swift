@@ -17,6 +17,7 @@ struct AddToDoView: View {
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var dataManager: DataManager
+    @StateObject var viewModel: AddToDoViewModel = AddToDoViewModel()
     private let eventManager = EventManager()
     
     @State private var title: String = ""
@@ -24,7 +25,7 @@ struct AddToDoView: View {
     @State private var dueDate: Date = Date().addingTimeInterval(60 * 15)
     @State private var showingDatePicker: Bool = false
     @State private var addToCalendar: Bool = false
-    @StateObject private var viewModel = AddToDoViewModel()
+    //@StateObject private var viewModel = AddToDoViewModel()
     @FocusState private var focus: FocusableField?
     @Binding var showingMessage: Bool {
         didSet {
@@ -72,7 +73,7 @@ struct AddToDoView: View {
                         .disabled(!showingDatePicker)
                         .tint(.purple)
                     Button {
-                        let newToDo: ToDo
+                        var newToDo: ToDo
                         if showingDatePicker {
                              newToDo = ToDo(id: UUID(),
                                                title: title,
@@ -80,15 +81,19 @@ struct AddToDoView: View {
                                                creationDate: Date().timeIntervalSince1970,
                                             completionDate: 0,
                                                dueDate: dueDate.timeIntervalSince1970,
-                                               isCompleted: false)
+                                            isCompleted: false, addedToCalendar: addToCalendar)
                         } else {
                             newToDo = ToDo(title: title, description: descr, creationDate: Date().timeIntervalSince1970)
                         }
                         
-                        dataManager.addToDo(newToDo)
+                        //dataManager.addToDo(newToDo)
+                        viewModel.addToDo(newToDo)
                         if addToCalendar {
                             do {
                                 try eventManager.addToCalendar(newToDo)
+                                newToDo.addedToCalendar = true
+                                //dataManager.updateToDo(newToDo)
+                                //viewModel.updateToDo(newToDo)
                             } catch {
                                 print(error)
                             }

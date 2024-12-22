@@ -28,48 +28,44 @@ final class ToDoListViewModel : ObservableObject {
     @Published var toDos: [ToDo] = []
     @Published var isLoading: Bool = false
     
-    //let repository : TaskRepository
-    var toDoListType: ToDoListType = .all
+    //var toDoListType: ToDoListType = .all
     
-    let repository = RepositoryManager.shared.getToDoRepository()
+    private var dataManager: DataManager = DataManager()
     
     
     init(){
-        Task {
-            await getToDos(.all)
-        }
+        
+        self.getToDos(.all)
+        
     }
     
     
     
-    func getToDos(_ type: ToDoListType) async {
+    func getToDos(_ type: ToDoListType) {
         isLoading = true
-        do {
-            toDos = try await repository.getToDos(type: type)
-            switch type {
-            case .active:
-                toDos = toDos.filter({ $0.isCompleted == false })
-            case .completed:
-                toDos =  toDos.filter({ $0.isCompleted == true })
-            case .all:
-                toDos =  toDos.filter({ $0.isCompleted == false }) + toDos.filter({ $0.isCompleted == true })
-            }
-        } catch {
-            print(error)
+        toDos = []
+        Task {
+            toDos = await dataManager.getToDos2(type)
+            isLoading = false
         }
-        isLoading = false
     }
         
     func addToDo(_ toDo: ToDo)async throws -> Void {
-        try await repository.addToDo(toDo)
+        dataManager.addToDo(toDo)
     }
     
     func updateToDo(_ toDo: ToDo)async throws -> Void {
-        try await repository.updateToDo(toDo)
+        dataManager.updateToDo(toDo)
     }
     
-    func deleteTask(_ toDo: ToDo)async throws -> Void {
-        try await repository.deleteToDo(toDo)
-        //repository.getTasks(type: <#T##TaskListType#>)
+    func deleteToDo(_ toDo: ToDo) {
+        Task {
+            
+            let aaa = dataManager.deleteToDo(toDo)
+            await print(aaa.value.count)
+            getToDos(.all)
+        }
+        
+    
     }
 }

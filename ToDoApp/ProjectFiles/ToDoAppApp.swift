@@ -22,6 +22,7 @@ struct ToDoAppApp: App {
             //RootView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(DataManager())
+                .environmentObject(ToDoListViewModel())
                 //.environmentObject(AuthenticationManager())
         }
     }

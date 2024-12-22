@@ -33,7 +33,7 @@ final class CoreDataToDoRepository: ToDoRepository {
                          creationDate: TimeInterval($0.creationDate),
                          completionDate: TimeInterval($0.completionDate),
                          dueDate: TimeInterval($0.dueDate),
-                         isCompleted: $0.isCompleted) }
+                         isCompleted: $0.isCompleted, addedToCalendar: $0.addedToCalendar) }
             }
             catch {
                 print("Error fetching ToDos from Core Data: \(error)")
@@ -51,6 +51,7 @@ final class CoreDataToDoRepository: ToDoRepository {
             newToDo.creationDate = Int64(toDo.creationDate)
             newToDo.dueDate = Int64(toDo.dueDate ?? 0.0)
             newToDo.isCompleted = false
+            newToDo.addedToCalendar = toDo.addedToCalendar
             self.saveContext()
         }
         
@@ -62,8 +63,12 @@ final class CoreDataToDoRepository: ToDoRepository {
         await context.perform {
             do {
                 if let entity = try self.context.fetch(fetchRequest).first {
+                    entity.title = toDo.title
+                    entity.description_ = toDo.description_
+                    entity.dueDate = Int64(toDo.dueDate ?? 0)
                     entity.isCompleted = toDo.isCompleted
                     entity.completionDate = Int64(toDo.completionDate ?? 0)
+                    entity.addedToCalendar = toDo.addedToCalendar
                     self.saveContext()
                 }
             } catch {

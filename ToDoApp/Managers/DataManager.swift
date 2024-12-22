@@ -42,6 +42,7 @@ final class DataManager: ObservableObject {
                     toDos =  toDos.filter({ $0.isCompleted == false }) + toDos.filter({ $0.isCompleted == true })
                 }
                 print("fethcing inprogress")
+                print(toDos)
                 isLoading = false
 
             } catch {
@@ -49,7 +50,39 @@ final class DataManager: ObservableObject {
             }
         }
         print("fethcing ends")
+        
             }
+    
+    
+    
+    func getToDos2(_ type: ToDoListType) async -> [ToDo] {
+        print("fethcing begins")
+        toDos = []
+        self.type = type
+            do {
+                toDos = try await repository.getToDos(type: type)
+                switch type {
+                case .active:
+                    toDos = toDos.filter({ $0.isCompleted == false })
+                case .completed:
+                    toDos =  toDos.filter({ $0.isCompleted == true })
+                case .all:
+                    toDos =  toDos.filter({ $0.isCompleted == false }) + toDos.filter({ $0.isCompleted == true })
+                }
+                print("fethcing inprogress")
+                print(toDos)
+                return toDos
+                
+            } catch {
+                print(error)
+                return []
+            }
+    }
+    
+    
+    
+    
+    
     
     func addToDo(_ toDo: ToDo) {
         Task {
@@ -61,14 +94,22 @@ final class DataManager: ObservableObject {
     func updateToDo(_ toDo: ToDo) {
         Task {
             try await repository.updateToDo(toDo)
+            //print(toDo.addedToCalendar.description)
             getToDos(type)
+            
         }
     }
     
-    func deleteToDo(_ toDo: ToDo) {
+    func deleteToDo(_ toDo: ToDo) -> Task<[ToDo], Never> {
         Task {
-            try await repository.deleteToDo(toDo)
-            getToDos(type)
+            do {
+                try await repository.deleteToDo(toDo)
+                getToDos(type)
+                return toDos
+            } catch {
+                return []
+            }
+            
         }
     }
 }

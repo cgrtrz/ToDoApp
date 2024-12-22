@@ -14,7 +14,6 @@ final class EventManager {
     private let reminder: EKReminder
     
     
-    
     init () {
         reminder = EKReminder(eventStore: eventStore)
     }

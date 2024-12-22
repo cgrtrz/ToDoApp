@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ToDoListView: View {
     
-    @EnvironmentObject var dataManager: DataManager
-    @StateObject var viewModel = ToDoListViewModel()
+    //@EnvironmentObject var dataManager: DataManager
+    @StateObject var viewModel: ToDoListViewModel = ToDoListViewModel()
     
     @State var isOn: Bool
     @State var showingToDos = 0
@@ -58,11 +58,11 @@ struct ToDoListView: View {
                 
                 ZStack {
                     List {
-                        if dataManager.toDos.contains(where: { $0.isCompleted == false }) {
+                    
                             
                        
                         Section(header: Text("Active")) {
-                            ForEach(dataManager.toDos, id: \.self) { toDo in
+                            ForEach(viewModel.toDos, id: \.self) { toDo in
                                 if !toDo.isCompleted {
                                     NavigationLink {
                                         ToDoDetailView(toDo: toDo)
@@ -71,7 +71,8 @@ struct ToDoListView: View {
                                             .swipeActions {
                                                 Button {
                                                     showingMessage = false
-                                                    dataManager.deleteToDo(toDo)
+                                                    viewModel.deleteToDo(toDo)
+                                                    refreshToDos()
                                                     message = "\(toDo.title) deleted"
                                                     withAnimation{
                                                         
@@ -102,12 +103,12 @@ struct ToDoListView: View {
                                 
                             }
                         }
-                        }
-                        if dataManager.toDos.contains(where: \.isCompleted) {
+                        
+                        
                             
                             
                             Section(header: Text("Completed")) {
-                                ForEach(dataManager.toDos, id: \.self) { toDo in
+                                ForEach(viewModel.toDos, id: \.self) { toDo in
                                     if toDo.isCompleted {
                                         NavigationLink {
                                             ToDoDetailView(toDo: toDo)
@@ -116,20 +117,29 @@ struct ToDoListView: View {
                                                 .swipeActions {
                                                     Button {
                                                         showingMessage = false
-                                                        dataManager.deleteToDo(toDo)
+                                                        withAnimation {
+                                                            viewModel.deleteToDo(toDo)
+                                                                
+                                                        }
+                                                        
+                                                        
                                                         message = "\(toDo.title) deleted"
                                                         withAnimation{
                                                             
                                                             showingMessage = true
                                                         }
                                                     }
+                                                
                                                     label: {
                                                         VStack {
                                                             Image(systemName: "trash")
                                                                 .tint(.red)
                                                             Text("Delete")
                                                         }
+                                                        .padding()
+                                                        .clipShape(Circle())
                                                     }
+                                                    
                                                     Button {
                                                         Task {
                                                             //
@@ -148,12 +158,13 @@ struct ToDoListView: View {
                                 }
                             }
                             
-                        }
+                        
                         
                         
                     }
+                    .listStyle(.plain)
                     .scrollContentBackground(.hidden)
-                    if dataManager.isLoading {
+                    if viewModel.isLoading {
                         ProgressView()
                     }
                     Spacer()
@@ -255,8 +266,11 @@ struct ToDoListView: View {
     }
     
     func refreshToDos() {
-            dataManager.toDos = []
-            dataManager.getToDos(ToDoListType(rawValue: showingToDos) ?? .all)
+//            dataManager.toDos = []
+//            dataManager.getToDos(ToDoListType(rawValue: showingToDos) ?? .all)
+        
+        viewModel.toDos = []
+        viewModel.getToDos(ToDoListType(rawValue: showingToDos) ?? .all)
     }
 }
 #Preview {

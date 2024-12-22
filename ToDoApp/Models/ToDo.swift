@@ -16,6 +16,7 @@ struct ToDo : Identifiable, Equatable, Hashable {
     var completionDate: TimeInterval?
     var dueDate: TimeInterval?
     var isCompleted: Bool = false
+    var addedToCalendar: Bool
     
     var hasDueDate: Bool {
         if dueDate != 0 {
@@ -43,7 +44,8 @@ struct ToDo : Identifiable, Equatable, Hashable {
         creationDate: TimeInterval,
         completionDate: TimeInterval,
         dueDate: TimeInterval,
-        isCompleted: Bool
+        isCompleted: Bool,
+        addedToCalendar: Bool
     ) {
         self.id = id
         self.title = title
@@ -52,6 +54,7 @@ struct ToDo : Identifiable, Equatable, Hashable {
         self.completionDate = completionDate
         self.dueDate = dueDate
         self.isCompleted = isCompleted
+        self.addedToCalendar = addedToCalendar
     }
     init(
         title: String,
@@ -65,6 +68,7 @@ struct ToDo : Identifiable, Equatable, Hashable {
         self.creationDate = creationDate
         //self.dueDate = dueDate
         self.isCompleted = false
+        self.addedToCalendar = false
     }
 }
 
