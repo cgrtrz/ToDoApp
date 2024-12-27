@@ -7,16 +7,66 @@
 
 import SwiftUI
 
+extension ToDoListView {
+    
+    
+    
+    @ViewBuilder
+    private func toDoListRowView(_ toDo: ToDo, asdf: Binding<Bool>) -> some View {
+        var toDo = toDo
+        //val = toDo.isCompleted
+        HStack {
+            Toggle("some text", isOn: asdf)
+                .onChange(of: toDo.isCompleted) { _, _ in
+                    if toDo.isCompleted {
+                        toDo.completionDate = Date().timeIntervalSince1970
+                    } else {
+                        toDo.completionDate = 0
+                    }
+                    viewModel.updateToDo(toDo)
+                    
+                }
+            Text(toDo.title)
+                .font(.headline)
+                .lineLimit(2)
+                .foregroundStyle(toDo.isCompleted ? Color.gray :Color.primary)
+                .strikethrough(toDo.isCompleted)
+            Spacer()
+            Text(!toDo.isCompleted && toDo.hasDueDate && toDo.overdue ? "!" :"")
+                .foregroundStyle(Color.red)
+            
+        }
+    }
+}
+
 struct ToDoListView: View {
     
+    //TODO: Think about DataManager
     //@EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var settingsManager: SettingsManager
     @StateObject var viewModel: ToDoListViewModel = ToDoListViewModel()
     
-    @State var isOn: Bool
-    @State var showingToDos = 0
-    @State var selectedItem: Int?
+    @State var ddd: Bool = false
+    
+    //@Binding var val: Bool
+    
+    //FIXME: Delete the lines below.
+    //@State var isOn: Bool
+    //@State var showingToDos = 0
+    //@State var toDoo: ToDo?
+    @State var rotateGear: Int = .zero
+    
+    //FIXME: Set ToDoListType from UserDefaults
+    @State var selectedToDoListType: ToDoListType = .all //No need
+    //@State var selectedItem: Int?
+    
+    //Sheets
     @State private var showingAddToDoSheet = false
     @State private var showingSettingsSheet = false
+    
+    //FIXME: Find a viable solution.
+    //Being used to show popup.
+    @State var message = ""
     @State var showingMessage = false {
         didSet {
             if showingMessage == true {
@@ -27,12 +77,12 @@ struct ToDoListView: View {
         }
     }
     
-    @State var message = ""
     
     var body: some View {
         
         NavigationStack {
             VStack {
+                //MARK: - HEADER
                 HStack{
                     Image("icon")
                         .resizable()
@@ -42,239 +92,213 @@ struct ToDoListView: View {
                     Text("To Do App")
                         .font(.largeTitle)
                         .bold()
-                        .foregroundStyle(Theme.headerColor)
+                        .foregroundStyle(settingsManager.settings.selectedTheme.colors.tintColor)
                     //Spacer()
                 }
+                //MARK: - TODOLISTTYPE PICKER
                 .padding(.horizontal, 36)
-                Picker ("", selection: $showingToDos) {
+                Picker ("", selection: $viewModel.selectedToDoListType) {
                     ForEach(ToDoListType.allCases, id:\.self) { type in
                         Text(type.name).tag(type.rawValue)
                     }
                 }
                 .pickerStyle(.segmented)
-                .foregroundStyle(.purple)
+                .foregroundStyle(settingsManager.settings.selectedTheme.colors.tintColor)
                 .padding(.horizontal, 36)
-                .onChange(of: showingToDos) { refreshToDos() }
+                //.onChange(of: viewModel.selectedToDoListType) { refreshToDos() }
                 
+                //ZStack to switch between ProgressView and ListView...
                 ZStack {
+                    //Main ListView
                     List {
-                    
-                            
+                        
+                        //FIXME: Reeconsider how to show active and completed ToDos seperately. This is not an effective way.
+                        if !viewModel.toDos.filter({!$0.isCompleted}).isEmpty {
+                            //Active ToDos section...
+                             Section(header: Text("Active")) {
+                                 ForEach(viewModel.toDos, id: \.self) { toDo in
+                                    
+                                     if !toDo.isCompleted {
+                                         NavigationLink {
+                                             ToDoDetailView(toDo: toDo)
+                                         } label: {
+                                             ToDoRowView(toDo: toDo, vm: viewModel)
+                                             
+                                             
+                                         }
+                                     }
+                                 }
+                                 .onDelete { indexSet in
+                                     if let index = indexSet.first {
+                                         viewModel.deleteToDo(viewModel.toDos[index])
+                                     }
+                                     
+                                 }
+                             }//Active ToDos section...
+                        } //if condition to make sure there is/are active todos
                        
-                        Section(header: Text("Active")) {
-                            ForEach(viewModel.toDos, id: \.self) { toDo in
-                                if !toDo.isCompleted {
-                                    NavigationLink {
-                                        ToDoDetailView(toDo: toDo)
-                                    } label: {
-                                        ToDoRowView(toDo: toDo)
-                                            .swipeActions {
-                                                Button {
-                                                    showingMessage = false
-                                                    viewModel.deleteToDo(toDo)
-                                                    refreshToDos()
-                                                    message = "\(toDo.title) deleted"
-                                                    withAnimation{
-                                                        
-                                                        showingMessage = true
-                                                    }
-                                                }
-                                                label: {
-                                                    VStack {
-                                                        Image(systemName: "trash")
-                                                            .tint(.red)
-                                                        Text("Delete")
-                                                    }
-                                                }
-                                                Button {
-                                                    Task {
-                                                        //
-                                                    }
-                                                } label: {
-                                                    VStack {
-                                                        Image(systemName: "pencil")
-                                                            .tint(.blue)
-                                                        Text("Edit")
-                                                    }
-                                                }
-                                            }
-                                    }
-                                }
-                                
-                            }
-                        }
-                        
-                        
-                            
-                            
+                        if !viewModel.toDos.filter({$0.isCompleted}).isEmpty {
+                            //Completed ToDos section...
                             Section(header: Text("Completed")) {
+                                
+                                //ToDos are loading...
                                 ForEach(viewModel.toDos, id: \.self) { toDo in
-                                    if toDo.isCompleted {
+                                    if toDo.isCompleted { //To populate comp;eted ToDos
                                         NavigationLink {
                                             ToDoDetailView(toDo: toDo)
                                         } label: {
-                                            ToDoRowView(toDo: toDo)
-                                                .swipeActions {
-                                                    Button {
-                                                        showingMessage = false
-                                                        withAnimation {
-                                                            viewModel.deleteToDo(toDo)
-                                                                
-                                                        }
-                                                        
-                                                        
-                                                        message = "\(toDo.title) deleted"
-                                                        withAnimation{
-                                                            
-                                                            showingMessage = true
-                                                        }
-                                                    }
-                                                
-                                                    label: {
-                                                        VStack {
-                                                            Image(systemName: "trash")
-                                                                .tint(.red)
-                                                            Text("Delete")
-                                                        }
-                                                        .padding()
-                                                        .clipShape(Circle())
-                                                    }
-                                                    
-                                                    Button {
-                                                        Task {
-                                                            //
-                                                        }
-                                                    } label: {
-                                                        VStack {
-                                                            Image(systemName: "pencil")
-                                                                .tint(.blue)
-                                                            Text("Edit")
-                                                        }
-                                                    }
-                                                }
+                                            ToDoRowView(toDo: toDo, vm: viewModel)
                                         }
                                     }
                                     
                                 }
-                            }
-                            
+                                .onDelete { indexSet in
+                                    if let index = indexSet.first {
+                                        viewModel.deleteToDo(viewModel.toDos[index])
+                                    }
+                                    
+                                }
+                            }//Completed ToDos section...
+                        } //if condition to make sure there is/are completed todos
                         
-                        
-                        
-                    }
+                    }// List (main ToDo List)
                     .listStyle(.plain)
-                    .scrollContentBackground(.hidden)
-                    if viewModel.isLoading {
-                        ProgressView()
+                    .scrollContentBackground(.hidden)//TODO: Reconsider this modifier.
+                    .deleteDisabled(false)
+                    //FIXME: Set animation
+                    //.animation(.linear(duration: 0.01), value: viewModel.toDos.count)
+                    
+                    
+                    //2nd View in ZStack, shown if ToDo list is empty.
+                    if viewModel.toDos.isEmpty && !viewModel.isLoading {
+                        switch viewModel.selectedToDoListType {
+                        case .all:
+                            ContentUnavailableView("ToDo List is empty", systemImage: "plus", description: Text("Add new item to your ToDo List"))
+                        case .active:
+                            ContentUnavailableView("No active ToDo items", systemImage: "plus", description: Text("Add new item to your ToDo List"))
+                        case .completed:
+                            ContentUnavailableView("No completed ToDo items", systemImage: "plus", description: Text("Add new item to your ToDo List"))
+                        }
+                        
                     }
-                    Spacer()
-                }
+                    
+                    
+                    
+                    //3rd View in ZStack, While data is loading, ProgressView rotates...
+//                    if viewModel.isLoading {
+//                        ProgressView()
+//                    }
+                    
+                    Spacer() //To push content up...
+                }//ZStack to switch between ProgressView and ListView...
+                //Add New sheet.
                 .sheet(isPresented: $showingAddToDoSheet) {
-                    AddToDoView( showingMessage: $showingMessage, message: $message)
+                    AddToDoView(vm: viewModel, showingMessage: $showingMessage, message: $message)
                         .presentationDetents([.large])
                         .presentationDragIndicator(.visible)
                         .presentationCornerRadius(12)
                 }
+                //Settings sheet.
                 .sheet(isPresented: $showingSettingsSheet) {
+                    //TODO: Decide how to present settings sheet.
                     SettingsView()
-                    
                         .presentationDetents([.large])
                         .presentationDragIndicator(.visible)
                         .presentationCornerRadius(12)
+                        .presentationCompactAdaptation(.fullScreenCover)
                 }
-                //.navigationTitle("To-Do-Tasks")
                 
-                .toolbar {
-//                    ToolbarItem (placement: .principal) {
-//                        Text("To-Do-Tasks")
-//                            .font(.largeTitle)
-//                            .bold()
-//                            .foregroundStyle(.purple)
-//                    }
-//                    ToolbarItem (placement: .bottomBar) {
-//                        Button {
-//                            showingAddToDoSheet = true
-//                        } label: {
-//                            Image(systemName: "plus.circle.fill")
-//                        }
-//                    }
-                }
+                //Seetings and Add New Buttons
                 HStack {
-                    Button {
-                        showingSettingsSheet = true
+//                    Button {
+//                        showingSettingsSheet = true
+                    NavigationLink {
+                        SettingsView()
                     } label: {
-                        HStack {
-                            Image(systemName: "gearshape.fill")
-                                .font(.title)
-                            Text("Settings")
-                                .font(.title3)
-                            Spacer()
+                        ZStack {
+                            Capsule(style: .circular)
+                                .stroke(settingsManager.settings.selectedTheme.colors.tintColor)
+                            HStack {
+                                //FIXME: Review animation.
+                                Image(systemName: "gearshape.fill")
+                                    .font(.title)
+                                    .symbolEffect(.rotate, value: rotateGear)
+                                Text("Settings")
+                                    .font(.title3)
+                                Spacer()
+                            }
+                            .foregroundStyle(settingsManager.settings.selectedTheme.colors.tintColor)
+                            .padding()
                         }
-                        .foregroundStyle(.purple)
+                        .frame(width: nil, height: 65)
                         .padding()
                     }
+                    //.hoverEffect(.highlight)
+//                    .onContinuousHover { _ in
+//                        rotateGear = 10
+//                    }
+//                    .onHover { a in
+//                        print("\(a.description)")
+//                        if a {
+//                            rotateGear = 10
+//                        }
+//                        
+//                    }
                     
-                    Button {
-                        showingAddToDoSheet = true
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("Add new")
-                                .font(.title3)
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title)
+                    //Button {
+                        //showingAddToDoSheet = true
+                        NavigationLink(destination:
+                            AddToDoView(vm: viewModel, showingMessage: $showingMessage, message: $message)
+                        ) {
+                            ZStack {
+                                Capsule(style: .circular)
+                                    .stroke(settingsManager.settings.selectedTheme.colors.tintColor)
+                            HStack {
+                                Spacer()
+                                Text("Add new")
+                                    .font(.title3)
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.title)
                         }
-                        .foregroundStyle(.purple)
-                        .padding()
+                            .foregroundStyle(settingsManager.settings.selectedTheme.colors.tintColor)
+                            .padding()
+                            }
+                            .frame(width: nil, height: 65)
+                            .padding()
+                        
                     }
-                }
-            }
-        }
-//        .modifier(Popup(isPresented: showingMessage, alignment: .bottom, content: {
-//            Color(.secondarySystemBackground)
-//                .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.085)
-//                .padding(.bottom, 65)
-//            
-//        }))
+                        
+                }//HStack for Seetings and Add New buttons.
+            }//Outer VStack
+        }//NavigationStack
         .overlay {
-            //showingMessage ? Color.red : Color.clear
             if showingMessage {
                 withAnimation(.interactiveSpring()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundStyle(Color(.secondarySystemBackground))
-                            
                         Text(message)
                     }.frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.085)
                         .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 200)
-                    
-                }//.transition(.offset(x: 0, y: UIScreen.main.bounds.height + 500))
-                //.transition()
+                }
             }
-            //if showingMessage {
-//                withAnimation{
-//                    MessageView(message: $message, isVisible: $showingMessage)
-//                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 700)
-//                        .popover(isPresented: $showingMessage) {
-//                            Text("popover")
-//                        }
-                    
-               // }
-            //}
+        }//overlay, showing popup after addition and deletion.
+        .accentColor(settingsManager.settings.selectedTheme.colors.tintColor)
+        .onAppear {
+            viewModel.selectedToDoListType = settingsManager.settings.selectedToDoListType
         }
-        .accentColor(.purple)
     }
     
     func refreshToDos() {
 //            dataManager.toDos = []
 //            dataManager.getToDos(ToDoListType(rawValue: showingToDos) ?? .all)
         
-        viewModel.toDos = []
-        viewModel.getToDos(ToDoListType(rawValue: showingToDos) ?? .all)
+        //viewModel.toDos = []
+        //viewModel.getToDos()
     }
 }
 #Preview {
-    ToDoListView( isOn: true).environmentObject(DataManager())
+    ToDoListView().environmentObject(DataManager())
         
 }
 

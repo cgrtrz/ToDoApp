@@ -17,7 +17,7 @@ struct MessageView: View {
         if isVisible {
             ZStack{
                 RoundedRectangle(cornerRadius: 16)
-                    .foregroundStyle(Theme.PopUp.backgroundColor)
+                    .foregroundStyle(Theme_old.PopUp.backgroundColor)
                 
                 Text(message)
             }.frame(width: Constants.PopUp.width, height: Constants.PopUp.height)

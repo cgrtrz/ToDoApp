@@ -7,7 +7,7 @@
 
 import Foundation
 
-@MainActor
+//@MainActor
 final class DataManager: ObservableObject {
     
     ///Dependency Injection
@@ -16,7 +16,7 @@ final class DataManager: ObservableObject {
     private let repository = RepositoryManager.shared.getToDoRepository()
     private var toDoListType: ToDoListType = .all
     private var type: ToDoListType = .all
-    @Published var toDos: [ToDo] = []
+    private var toDos: [ToDo] = []
     @Published var isLoading: Bool = false
     
     init(){
@@ -26,7 +26,7 @@ final class DataManager: ObservableObject {
     }
     
     func getToDos(_ type: ToDoListType) {
-        print("fethcing begins")
+        //print("fethcing begins")
         toDos = []
         self.type = type
         Task {
@@ -41,15 +41,15 @@ final class DataManager: ObservableObject {
                 case .all:
                     toDos =  toDos.filter({ $0.isCompleted == false }) + toDos.filter({ $0.isCompleted == true })
                 }
-                print("fethcing inprogress")
-                print(toDos)
+                //print("fethcing inprogress")
+                //print(toDos)
                 isLoading = false
 
             } catch {
                 print(error)
             }
         }
-        print("fethcing ends")
+        //print("fethcing ends")
         
             }
     
@@ -70,7 +70,7 @@ final class DataManager: ObservableObject {
                     toDos =  toDos.filter({ $0.isCompleted == false }) + toDos.filter({ $0.isCompleted == true })
                 }
                 print("fethcing inprogress")
-                print(toDos)
+                //print(toDos)
                 return toDos
                 
             } catch {
@@ -87,7 +87,7 @@ final class DataManager: ObservableObject {
     func addToDo(_ toDo: ToDo) {
         Task {
             try await repository.addToDo(toDo)
-            getToDos(type)
+            //getToDos(type)
         }
     }
     
@@ -95,19 +95,19 @@ final class DataManager: ObservableObject {
         Task {
             try await repository.updateToDo(toDo)
             //print(toDo.addedToCalendar.description)
-            getToDos(type)
+            //getToDos(type)
             
         }
     }
     
-    func deleteToDo(_ toDo: ToDo) -> Task<[ToDo], Never> {
+    func deleteToDo(_ toDo: ToDo) {
         Task {
             do {
                 try await repository.deleteToDo(toDo)
-                getToDos(type)
-                return toDos
+                //getToDos(type)
+                //return toDos
             } catch {
-                return []
+                //return []
             }
             
         }

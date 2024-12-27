@@ -8,12 +8,14 @@
 import Foundation
 import SwiftUI
 
-enum ToDoListType : Int, CaseIterable {
+//FIXME: Seperate enum to another file.
+enum ToDoListType : Int, CaseIterable, Codable {
+    
     case all = 0
     case active = 1
     case completed = 2
     
-    var name: String {
+    var name: LocalizedStringKey {
         switch self {
         case .all: return "All"
         case .active: return "Active"
@@ -25,45 +27,72 @@ enum ToDoListType : Int, CaseIterable {
 @MainActor
 final class ToDoListViewModel : ObservableObject {
     
-    @Published var toDos: [ToDo] = []
-    @Published var isLoading: Bool = false
-    
-    //var toDoListType: ToDoListType = .all
-    
+    //Data Manager
     private var dataManager: DataManager = DataManager()
     
+    //Publish these so that views can use.
+    @Published var toDos: [ToDo] = [] //ToDos that view shows.
+    {
+        didSet {
+            print("something changed... \(toDos.count)")
+            
+        }
+    }
+    @Published var isLoading: Bool = false //To rotate ProgressView while data is loading.
     
-    init(){
+    //Whenever selectedToDoListType changes, refresh ToDos array.
+    var selectedToDoListType: ToDoListType {
+        didSet {
+            print("selectedToDoListType has been changed to \(selectedToDoListType.name)")
+            getToDos()
+        }
+    }
+    
+    init() {
         
-        self.getToDos(.all)
+        //TODO: Set UserDefault keeps settings including selectedToDoListType by default.
+        self.selectedToDoListType = .all  //FIXME: Set ToDoListType from UserDefaults
+        
+        //FIXME: Set ToDoListType from UserDefaults
+        self.getToDos()
+        print("viewModel instantiated")
         
     }
     
-    
-    
-    func getToDos(_ type: ToDoListType) {
-        isLoading = true
+    //Get ToDos from DataManager and assign them to ToDos Array.
+    func getToDos() { // Always track the current selectedToDoListType
+        isLoading = true //View shows ProgressView
+        print("started......")
+        //FIXME: Check this line.
         toDos = []
+        
         Task {
-            toDos = await dataManager.getToDos2(type)
-            isLoading = false
+            toDos = await dataManager.getToDos2(selectedToDoListType)
+            isLoading = false //After ToDos are assigned to array, ProgressView disappears.
         }
     }
         
-    func addToDo(_ toDo: ToDo)async throws -> Void {
-        dataManager.addToDo(toDo)
+    func addToDo(_ toDo: ToDo) {
+        Task {
+            dataManager.addToDo(toDo)
+             getToDos()
+        }
     }
     
-    func updateToDo(_ toDo: ToDo)async throws -> Void {
-        dataManager.updateToDo(toDo)
+    func updateToDo(_ toDo: ToDo) {
+        Task {
+            dataManager.updateToDo(toDo)
+            getToDos()
+        }
     }
     
+    //FIXME: Reconsider this func
     func deleteToDo(_ toDo: ToDo) {
         Task {
-            
-            let aaa = dataManager.deleteToDo(toDo)
-            await print(aaa.value.count)
-            getToDos(.all)
+            dataManager.deleteToDo(toDo)
+            //await print(aaa.value.count)
+            print("deleting......")
+            getToDos()
         }
         
     

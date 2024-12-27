@@ -36,9 +36,10 @@ final class MockedNetworkToDoRepository: ToDoRepository {
     }
     
     func deleteToDo(_ toDo: ToDo) async throws {
-        //try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
+        try await Task.sleep(nanoseconds: NSEC_PER_SEC * 2)
         if let index = getArrayIndex(toDo) {
             toDos.remove(at: index)
+            print("deleted..........")
         } else {
             throw TaskRepositoryError.taskNotFound
         }

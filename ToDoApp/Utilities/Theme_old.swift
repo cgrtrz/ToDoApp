@@ -16,7 +16,7 @@ protocol ThemeStandards {
     static var tintColor: Color { get }
 }
 
-final class Theme: ThemeStandards {
+final class Theme_old: ThemeStandards {
     
     static let backgroundColor: Color = Color(.systemBackground)
     static let textColor: Color = Color(.label)

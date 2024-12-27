@@ -11,7 +11,8 @@ struct ToDoRowView: View {
     
     @EnvironmentObject var dataManager: DataManager
     @State var toDo: ToDo
-    @StateObject var viewModel = ToDoListViewModel()
+    //@StateObject var viewModel = ToDoListViewModel()
+    @ObservedObject var vm: ToDoListViewModel
     
     
     
@@ -28,7 +29,8 @@ struct ToDoRowView: View {
                         toDo.completionDate = 0
                     }
                     //print("\(toDo.id.uuidString) state is  \(toDo.isCompleted)...")
-                    dataManager.updateToDo(toDo)
+                    //dataManager.updateToDo(toDo)
+                    vm.updateToDo(toDo)
                     
                 }
             Text(toDo.title)

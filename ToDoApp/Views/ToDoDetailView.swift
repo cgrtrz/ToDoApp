@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ToDoDetailView: View {
     
+    @EnvironmentObject var settingsManager: SettingsManager
     @State var toDo: ToDo
     @State private var dueDate: Date = Date()
     @State private var isEditing: Bool = false
@@ -89,14 +90,14 @@ struct ToDoDetailView: View {
                                 Text("Add to Calendar")
                                 Spacer()
                                 Toggle("", isOn: $addToCalendar)
-                                    .tint(.purple)
+                                    .tint(settingsManager.settings.selectedTheme.colors.tintColor)
                             }
                         }
                     }
                     
                     
                 }
-                Section {
+                
                     Button {
                         //
                     } label: {
@@ -108,9 +109,9 @@ struct ToDoDetailView: View {
                     .disabled(toDo.title.isEmpty)
                     .buttonBorderShape(.roundedRectangle)
                     .buttonStyle(.borderedProminent)
-                    .tint(.purple)
+                    .tint(settingsManager.settings.selectedTheme.colors.tintColor)
 
-                }
+                
             }.onAppear{
                 date = Date(timeIntervalSince1970: toDo.dueDate ?? 0)
                     

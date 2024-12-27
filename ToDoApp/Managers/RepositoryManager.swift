@@ -14,6 +14,7 @@ final class RepositoryManager {
     //Set repositories to inject into the app.
     private let toDoRepositoryType: ToDoRepositoryType = .coreData
     private let authenticationRepositoryType: AuthenticationRepositoryType = .mocked
+    private let settingsRepositoryType: SettingsRepositoryType = .userDefaults
     
     func getToDoRepository() -> ToDoRepository {
         switch toDoRepositoryType {
@@ -24,7 +25,6 @@ final class RepositoryManager {
         case .coreData:
             return CoreDataToDoRepository()
         }
-        
     }
     
     func getAuthenticationRepository() -> AuthenticationRepository {
@@ -36,6 +36,12 @@ final class RepositoryManager {
         case .apple:
             return AppleAuthenticationRepository()
         }
-        
+    }
+    
+    func getSettingsRepository() -> SettingsRepository {
+        switch settingsRepositoryType {
+        case .userDefaults:
+            return UserDefaultsSettingsRepository()
+        }
     }
 }

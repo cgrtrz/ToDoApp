@@ -1,0 +1,427 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "!" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "!"
+          }
+        }
+      }
+    },
+    "**Title**" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Başlık**"
+          }
+        }
+      }
+    },
+    "aa" : {
+      "shouldTranslate" : false
+    },
+    "Access to Calendar" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takvime erişim"
+          }
+        }
+      }
+    },
+    "Access to Reminders" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hatırlatmalara erişim"
+          }
+        }
+      }
+    },
+    "Active" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktif"
+          }
+        }
+      }
+    },
+    "Add new" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni ekle"
+          }
+        }
+      }
+    },
+    "Add new item to your ToDo List" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yapılacaklar listesine yeni görev ekle"
+          }
+        }
+      }
+    },
+    "Add Task" : {
+
+    },
+    "Add to Calendar" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takvime ekle"
+          }
+        }
+      }
+    },
+    "Add to calendar?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takvime ekle?"
+          }
+        }
+      }
+    },
+    "Added to calendar" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takvime eklendi"
+          }
+        }
+      }
+    },
+    "All" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tümü"
+          }
+        }
+      }
+    },
+    "Allow notifications" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildirimlere izin ver"
+          }
+        }
+      }
+    },
+    "Change Theme" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temayı depiştir"
+          }
+        }
+      }
+    },
+    "Completed" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamamlananlar"
+          }
+        }
+      }
+    },
+    "Completed on %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ‘de tamamlandı."
+          }
+        }
+      }
+    },
+    "Created on %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ‘de oluşturuldu."
+          }
+        }
+      }
+    },
+    "Custom Style" : {
+
+    },
+    "Default ToDo Type" : {
+
+    },
+    "Delete" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sil"
+          }
+        }
+      }
+    },
+    "Description" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Açıklama"
+          }
+        }
+      }
+    },
+    "Don't have an account?" : {
+
+    },
+    "Due date" : {
+
+    },
+    "Due Date" : {
+
+    },
+    "Email" : {
+
+    },
+    "Hello World!" : {
+
+    },
+    "locAddNew" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "add new"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "yeni ekle"
+          }
+        }
+      }
+    },
+    "locSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "settings"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ayarlar"
+          }
+        }
+      }
+    },
+    "MY CUSTOM DESIGN" : {
+
+    },
+    "No active ToDo items" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktif görevin yok"
+          }
+        }
+      }
+    },
+    "No completed ToDo items" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taamlanmış görevin yok"
+          }
+        }
+      }
+    },
+    "OR" : {
+
+    },
+    "password" : {
+
+    },
+    "Password" : {
+
+    },
+    "Permissions" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İzinler"
+          }
+        }
+      }
+    },
+    "Preferences" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tercihler"
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaldır"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaydet"
+          }
+        }
+      }
+    },
+    "Select Theme" : {
+
+    },
+    "Set Due Date?" : {
+
+    },
+    "Settings" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar"
+          }
+        }
+      }
+    },
+    "Sign In with Apple" : {
+
+    },
+    "Sign In with Email" : {
+
+    },
+    "Sign In with Google" : {
+
+    },
+    "Sign out" : {
+
+    },
+    "Sign Up" : {
+
+    },
+    "some text" : {
+
+    },
+    "Start Up" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlangıç"
+          }
+        }
+      }
+    },
+    "Theme" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema"
+          }
+        }
+      }
+    },
+    "Theme is loading..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema yükleniyor…"
+          }
+        }
+      }
+    },
+    "Title" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlık"
+          }
+        }
+      }
+    },
+    "To Do App" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ToDo App"
+          }
+        }
+      }
+    },
+    "ToDo List is empty" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste boş"
+          }
+        }
+      }
+    },
+    "Update Task" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görevi Güncelle"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

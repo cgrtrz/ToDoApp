@@ -174,8 +174,8 @@
             filePath = "ToDoApp/Views/ToDoRowView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -206,8 +206,8 @@
             filePath = "ToDoApp/Views/ToDoDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -222,8 +222,8 @@
             filePath = "ToDoApp/Views/AddToDoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -247,16 +247,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E47DF77C-D15C-4A66-875C-B78F88B74BB6"
+            uuid = "B061A3BE-B7DD-43D4-BD35-B70EDBC78B62"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ToDoApp/ViewModels/ToDoListViewModel.swift"
+            filePath = "ToDoApp/Views/SettingsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "deleteToDo(_:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AD668D4A-FE0C-4A41-9E18-48117EA6FCC9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoApp/Repositories/SettingsRepository/SettingsRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "load()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7092ACBE-8218-4F53-81FF-F5C52444AC15"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoApp/Repositories/SettingsRepository/SettingsRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "save(settings:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

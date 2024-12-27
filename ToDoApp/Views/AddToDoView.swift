@@ -17,7 +17,13 @@ struct AddToDoView: View {
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var settingsManager: SettingsManager
     @StateObject var viewModel: AddToDoViewModel = AddToDoViewModel()
+    
+    
+    @ObservedObject var vm: ToDoListViewModel
+    
+    
     private let eventManager = EventManager()
     
     @State private var title: String = ""
@@ -62,16 +68,16 @@ struct AddToDoView: View {
                         Text("Set Due Date?")
                             
                     }
-                        .tint(.purple)
+                        .tint(settingsManager.settings.selectedTheme.colors.tintColor)
                     if showingDatePicker {
                         DatePicker("Due Date", selection: $dueDate, in: Date().addingTimeInterval(60 * 15)...)
                             .datePickerStyle(.graphical)
-                            .tint(.purple)
+                            .tint(settingsManager.settings.selectedTheme.colors.tintColor)
                             .id(Date().addingTimeInterval(60 * 15))
                     }
                     Toggle("Add to calendar?", isOn: $addToCalendar)
                         .disabled(!showingDatePicker)
-                        .tint(.purple)
+                        .tint(settingsManager.settings.selectedTheme.colors.tintColor)
                     Button {
                         var newToDo: ToDo
                         if showingDatePicker {
@@ -87,7 +93,8 @@ struct AddToDoView: View {
                         }
                         
                         //dataManager.addToDo(newToDo)
-                        viewModel.addToDo(newToDo)
+                        //viewModel.addToDo(newToDo)
+                        vm.addToDo(newToDo)
                         if addToCalendar {
                             do {
                                 try eventManager.addToCalendar(newToDo)
@@ -112,13 +119,13 @@ struct AddToDoView: View {
                     .disabled(title.isEmpty)
                     .buttonBorderShape(.roundedRectangle)
                     .buttonStyle(.borderedProminent)
-                    .tint(.purple)
+                    .tint(settingsManager.settings.selectedTheme.colors.tintColor)
                 }
                 .scrollContentBackground(.hidden)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text("Add new")
-                            .foregroundStyle(.purple)
+                            .foregroundStyle(settingsManager.settings.selectedTheme.colors.tintColor)
                             .font(.title2)
                             .bold()
                     }
@@ -129,7 +136,7 @@ struct AddToDoView: View {
                             Image(systemName: "xmark.circle.fill")
                                 .font(.title2)
                                 .symbolRenderingMode(.palette)
-                                .foregroundStyle(.white, .purple)
+                                .foregroundStyle(.white, settingsManager.settings.selectedTheme.colors.tintColor)
                                 .bold()
                                 //.padding()
                         }
@@ -144,5 +151,5 @@ struct AddToDoView: View {
 }
 
 #Preview {
-    AddToDoView(showingMessage: .constant(false), message: .constant(""))
+    AddToDoView(vm: ToDoListViewModel(), showingMessage: .constant(false), message: .constant(""))
 }

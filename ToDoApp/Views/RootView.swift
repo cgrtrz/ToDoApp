@@ -13,7 +13,7 @@ struct RootView: View {
     
     var body: some View {
         if authManager.isUserAuthenticated == .signedIn {
-            ToDoListView(isOn: true)
+            ToDoListView()
         } else {
             LoginView()
         }

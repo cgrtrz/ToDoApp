@@ -85,6 +85,7 @@ final class CoreDataToDoRepository: ToDoRepository {
                 if let entity = try self.context.fetch(fetchRequest).first {
                     self.context.delete(entity)
                     self.saveContext()
+                    print("deleted......")
                 }
             } catch {
                 print("Error deleting task: \(error)")

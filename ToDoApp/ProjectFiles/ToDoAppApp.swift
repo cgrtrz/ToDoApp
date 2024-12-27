@@ -17,12 +17,13 @@ struct ToDoAppApp: App {
         WindowGroup {
             //ContentView()
                 
-            ToDoListView(isOn: true)
+            ToDoListView()
             
             //RootView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(DataManager())
-                .environmentObject(ToDoListViewModel())
+                .environmentObject(SettingsManager())
+                //.environmentObject(ToDoListViewModel())
                 //.environmentObject(AuthenticationManager())
         }
     }
