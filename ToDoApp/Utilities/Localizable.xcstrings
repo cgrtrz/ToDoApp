@@ -24,9 +24,6 @@
         }
       }
     },
-    "aa" : {
-      "shouldTranslate" : false
-    },
     "Access to Calendar" : {
       "localizations" : {
         "tr" : {
@@ -48,6 +45,7 @@
       }
     },
     "Active" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -76,9 +74,6 @@
           }
         }
       }
-    },
-    "Add Task" : {
-
     },
     "Add to Calendar" : {
       "localizations" : {
@@ -142,6 +137,7 @@
       }
     },
     "Completed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -197,19 +193,10 @@
         }
       }
     },
-    "Don't have an account?" : {
-
-    },
     "Due date" : {
 
     },
     "Due Date" : {
-
-    },
-    "Email" : {
-
-    },
-    "Hello World!" : {
 
     },
     "locAddNew" : {
@@ -250,6 +237,7 @@
 
     },
     "No active ToDo items" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -260,6 +248,7 @@
       }
     },
     "No completed ToDo items" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -268,15 +257,6 @@
           }
         }
       }
-    },
-    "OR" : {
-
-    },
-    "password" : {
-
-    },
-    "Password" : {
-
     },
     "Permissions" : {
       "localizations" : {
@@ -334,19 +314,7 @@
         }
       }
     },
-    "Sign In with Apple" : {
-
-    },
-    "Sign In with Email" : {
-
-    },
-    "Sign In with Google" : {
-
-    },
     "Sign out" : {
-
-    },
-    "Sign Up" : {
 
     },
     "some text" : {

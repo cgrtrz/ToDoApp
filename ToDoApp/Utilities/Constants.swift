@@ -14,7 +14,7 @@ struct Constants {
     static let appIcon = "appicon"
     static let standardPadding: CGFloat = 12
     static let pad: EdgeInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 12)
-    
+    static let gradient: LinearGradient = LinearGradient(colors: [.indigo, .cyan], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 1, y: 1))
     struct PopUp {
         //PopUp Screen -> MessageView
         static let width: CGFloat = UIScreen.main.bounds.width * 0.85

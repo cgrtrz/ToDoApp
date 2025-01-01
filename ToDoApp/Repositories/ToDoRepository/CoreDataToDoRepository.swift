@@ -20,9 +20,10 @@ final class CoreDataToDoRepository: ToDoRepository {
     
     
     
-    func getToDos(type: ToDoListType) async throws -> [ToDo] {
+    func getToDos() async -> [ToDo] {
         let fetchRequest: NSFetchRequest<ToDoTaskEntity>
         fetchRequest = ToDoTaskEntity.fetchRequest()
+        
         return await context.perform {
             do {
                 let entities = try self.context.fetch(fetchRequest)
@@ -40,10 +41,11 @@ final class CoreDataToDoRepository: ToDoRepository {
                 return []
             }
         }
+        
     }
     
-    func addToDo(_ toDo: ToDo) async throws {
-        await context.perform {
+    func addToDo(_ toDo: ToDo) {
+        context.perform {
             let newToDo = ToDoTaskEntity(context: self.context)
             newToDo.id = toDo.id.uuidString
             newToDo.title = toDo.title
@@ -57,38 +59,42 @@ final class CoreDataToDoRepository: ToDoRepository {
         
     }
     
-    func updateToDo(_ toDo: ToDo) async throws {
+    func updateToDo(_ toDo: ToDo) {
         let fetchRequest: NSFetchRequest<ToDoTaskEntity> = ToDoTaskEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", toDo.id.uuidString as CVarArg)
-        await context.perform {
-            do {
-                if let entity = try self.context.fetch(fetchRequest).first {
-                    entity.title = toDo.title
-                    entity.description_ = toDo.description_
-                    entity.dueDate = Int64(toDo.dueDate ?? 0)
-                    entity.isCompleted = toDo.isCompleted
-                    entity.completionDate = Int64(toDo.completionDate ?? 0)
-                    entity.addedToCalendar = toDo.addedToCalendar
-                    self.saveContext()
+        Task {
+            await context.perform {
+                do {
+                    if let entity = try self.context.fetch(fetchRequest).first {
+                        entity.title = toDo.title
+                        entity.description_ = toDo.description_
+                        entity.dueDate = Int64(toDo.dueDate ?? 0)
+                        entity.isCompleted = toDo.isCompleted
+                        entity.completionDate = Int64(toDo.completionDate ?? 0)
+                        entity.addedToCalendar = toDo.addedToCalendar
+                        self.saveContext()
+                    }
+                } catch {
+                    print("Error updating task: \(error)")
                 }
-            } catch {
-                print("Error updating task: \(error)")
             }
         }
     }
     
-    func deleteToDo(_ toDo: ToDo) async throws {
+    func deleteToDo(_ toDo: ToDo) {
         let fetchRequest: NSFetchRequest<ToDoTaskEntity> = ToDoTaskEntity.fetchRequest()
                 fetchRequest.predicate = NSPredicate(format: "id == %@", toDo.id as CVarArg)
-        await context.perform {
-            do {
-                if let entity = try self.context.fetch(fetchRequest).first {
-                    self.context.delete(entity)
-                    self.saveContext()
-                    print("deleted......")
+        Task {
+            await context.perform {
+                do {
+                    if let entity = try self.context.fetch(fetchRequest).first {
+                        self.context.delete(entity)
+                        self.saveContext()
+                        print("deleted......")
+                    }
+                } catch {
+                    print("Error deleting task: \(error)")
                 }
-            } catch {
-                print("Error deleting task: \(error)")
             }
         }
     }

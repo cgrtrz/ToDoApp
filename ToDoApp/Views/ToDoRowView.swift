@@ -11,13 +11,8 @@ struct ToDoRowView: View {
     
     @EnvironmentObject var dataManager: DataManager
     @State var toDo: ToDo
-    //@StateObject var viewModel = ToDoListViewModel()
-    @ObservedObject var vm: ToDoListViewModel
-    
-    
     
     var body: some View {
-        
         
         HStack {
             Toggle("some text", isOn: $toDo.isCompleted)
@@ -28,15 +23,15 @@ struct ToDoRowView: View {
                     } else {
                         toDo.completionDate = 0
                     }
-                    //print("\(toDo.id.uuidString) state is  \(toDo.isCompleted)...")
-                    //dataManager.updateToDo(toDo)
-                    vm.updateToDo(toDo)
                     
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        dataManager.updateToDo(toDo)
+                    }
                 }
             Text(toDo.title)
                 .font(.headline)
                 .lineLimit(2)
-                .foregroundStyle(toDo.isCompleted ? Color.gray :Color.primary)
+                .foregroundStyle(toDo.isCompleted ? Color.gray : Color.primary)
                 .strikethrough(toDo.isCompleted)
             Spacer()
             Text(!toDo.isCompleted && toDo.hasDueDate && toDo.overdue ? "!" :"")

@@ -18,7 +18,7 @@ final class InMemoryToDoRepository: ToDoRepository {
         ToDo(id: UUID(), title: "Task 5", description: "Task 5 description", creationDate: Date().timeIntervalSince1970, completionDate: 0, dueDate: 0, isCompleted: false, addedToCalendar: true),
         ToDo(id: UUID(), title: "Task 6", description: "Task 6 description", creationDate: Date().timeIntervalSince1970, completionDate: 0, dueDate: 0, isCompleted: false, addedToCalendar: true)]
     
-    func getToDos(type: ToDoListType) async throws -> [ToDo] {
+    func getToDos() async throws -> [ToDo] {
         return toDos
     }
     

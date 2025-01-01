@@ -12,9 +12,9 @@ import Foundation
 ///Regardless of the source, processes data by means of pre-defined functions.
 protocol ToDoRepository {
     
-    func getToDos(type: ToDoListType) async throws -> [ToDo]
+    func getToDos() async throws-> [ToDo] 
     func addToDo(_ toDo: ToDo) async throws
     func updateToDo(_ toDo: ToDo) async throws
-    func deleteToDo(_ toDo: ToDo) async throws
+    func deleteToDo(_ toDo: ToDo)async throws
     
 }

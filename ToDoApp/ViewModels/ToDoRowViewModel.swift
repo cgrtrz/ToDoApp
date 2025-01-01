@@ -17,15 +17,6 @@ import Foundation
 /// - Remark: very good struct
 /// - Important: really important
 final class ToDoRowViewModel : ObservableObject{
-    var task: ToDo?
- 
-   
-    func updateMockData(id: UUID) {
-        print("print......")
-    }
     
-    func new(){
-        updateMockData(id: UUID())
-    }
 }
 

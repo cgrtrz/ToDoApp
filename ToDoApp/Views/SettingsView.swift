@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @EnvironmentObject var authManager: AuthenticationManager
+    //@EnvironmentObject var authManager: AuthenticationManager
     @EnvironmentObject var settingsManager: SettingsManager
     
     @State private var isOn: Bool = false
@@ -35,11 +35,11 @@ struct SettingsView: View {
                   
                     HStack {
                         Text("Default ToDo Type")
-                        Picker("aa", selection: $settingsManager.settings.selectedToDoListType) {
-                            ForEach(ToDoListType.allCases, id: \.self) { type in
-                                Text(type.name)
-                            }
-                        }
+//                        Picker("aa", selection: $settingsManager.settings.selectedToDoListType) {
+//                            ForEach(ToDoListType.allCases, id: \.self) { type in
+//                                Text(type.name)
+//                            }
+//                        }
                     }
                     HStack {
                         //Text("Default ToDo Type")
@@ -100,15 +100,19 @@ struct SettingsView: View {
             } label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 280, height: 60)
-                        .foregroundStyle(settingsManager.settings.selectedTheme.colors.tintColor)
+                        .frame(width: 280, height: 50)
+                        .foregroundStyle(settingsManager.settings.selectedTheme.colors.tintColor.gradient)
                     Text("Sign out")
                         .frame(maxWidth: .infinity, alignment: .center)
                         .bold()
                         .padding(.horizontal, 8)
                         .foregroundStyle(.white)
+                        
                 }
             }
+            GenericButton(text: "Sign out", action: {
+                //
+            })
             .toolbar {
                 ToolbarItem (placement: .topBarTrailing) {
                     Button {
@@ -117,6 +121,7 @@ struct SettingsView: View {
                         Text("Save")
                         
                     }
+                    
                     
                 }
             }

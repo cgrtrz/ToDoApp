@@ -9,7 +9,7 @@ import Foundation
 
 struct Settings: Codable {
     
-    var selectedToDoListType: ToDoListType
+    //var selectedToDoListType: ToDoListType
     var selectedTheme: Themes
 //    var selectedTheme: Theme
 //    var showToDoListTypeSelection: Bool

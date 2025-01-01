@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import SwiftUICore
 
 struct ToDo : Identifiable, Equatable, Hashable {
     
     var id: UUID
     var title: String
+    //var category: Category? = Category(name: "Default", color: Color.indigo, icon: Image(systemName: "list"))
     var description_: String
     var creationDate: TimeInterval
     var completionDate: TimeInterval?

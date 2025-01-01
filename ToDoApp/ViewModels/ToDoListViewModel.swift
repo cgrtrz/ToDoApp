@@ -8,93 +8,94 @@
 import Foundation
 import SwiftUI
 
-//FIXME: Seperate enum to another file.
-enum ToDoListType : Int, CaseIterable, Codable {
-    
-    case all = 0
-    case active = 1
-    case completed = 2
-    
-    var name: LocalizedStringKey {
-        switch self {
-        case .all: return "All"
-        case .active: return "Active"
-        case .completed: return "Completed"
-        }
-    }
-}
-
 @MainActor
 final class ToDoListViewModel : ObservableObject {
     
     //Data Manager
-    private var dataManager: DataManager = DataManager()
+//    private var dataManager: DataManager = DataManager()
+//    
+//    //Publish these so that views can use.
+//    @Published var toDosCache: [ToDo] = [] //ToDos that view shows.
+//    {
+//        didSet {
+//            print("something changed... \(toDosCache.count)")
+//        }
+//    }
+//    
+//    private var toDos: [ToDo] = []
     
-    //Publish these so that views can use.
-    @Published var toDos: [ToDo] = [] //ToDos that view shows.
-    {
-        didSet {
-            print("something changed... \(toDos.count)")
-            
-        }
-    }
-    @Published var isLoading: Bool = false //To rotate ProgressView while data is loading.
-    
-    //Whenever selectedToDoListType changes, refresh ToDos array.
-    var selectedToDoListType: ToDoListType {
-        didSet {
-            print("selectedToDoListType has been changed to \(selectedToDoListType.name)")
-            getToDos()
-        }
-    }
+    //@Published var isLoading: Bool = false //To rotate ProgressView while data is loading.
+    @Published var showingAddToDoSheet = false
+    @Published var showingSettingsSheet = false
+//    @Published var message = ""
+//    @Published var showingMessage = false {
+//        didSet {
+//            if showingMessage == true {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                    self.showingMessage = false
+//                }
+//            }
+//        }
+//    }
     
     init() {
-        
-        //TODO: Set UserDefault keeps settings including selectedToDoListType by default.
-        self.selectedToDoListType = .all  //FIXME: Set ToDoListType from UserDefaults
-        
-        //FIXME: Set ToDoListType from UserDefaults
-        self.getToDos()
-        print("viewModel instantiated")
+
+       // self.getToDos()
+        //print("viewModel instantiated")
+       
         
     }
     
     //Get ToDos from DataManager and assign them to ToDos Array.
-    func getToDos() { // Always track the current selectedToDoListType
-        isLoading = true //View shows ProgressView
-        print("started......")
-        //FIXME: Check this line.
-        toDos = []
-        
-        Task {
-            toDos = await dataManager.getToDos2(selectedToDoListType)
-            isLoading = false //After ToDos are assigned to array, ProgressView disappears.
-        }
+    func getToDos() {
+//        isLoading = true //View shows ProgressView
+//        print("started......")
+//        //FIXME: Check this line.
+//        toDosCache = []
+//        toDos = []
+//        
+//        Task {
+//            //toDos = await dataManager.getToDos()
+////            toDos.sort(by: { $0.creationDate > $1.creationDate })
+////            toDos.sort(by: { !$0.isCompleted && $1.isCompleted })
+////            toDosCache = toDos
+////            isLoading = false //After ToDos are assigned to array, ProgressView disappears.
+//        }
     }
         
-    func addToDo(_ toDo: ToDo) {
-        Task {
-            dataManager.addToDo(toDo)
-             getToDos()
-        }
-    }
+//    func addToDo(_ toDo: ToDo) {
+//        Task {
+//            dataManager.addToDo(toDo)
+//            getToDos()
+//            message = "New ToDo added: \(toDo.title)"
+//            showingMessage = true
+//        }
+//    }
     
-    func updateToDo(_ toDo: ToDo) {
-        Task {
-            dataManager.updateToDo(toDo)
-            getToDos()
-        }
-    }
+//    func updateToDo(_ toDo: ToDo) {
+//        Task {
+//            dataManager.updateToDo(toDo)
+//            
+//            //getToDos()
+//        }
+//        toDosCache.removeAll(where: { $0.id == toDo.id })
+//        toDosCache.append(toDo)
+//        toDosCache.sort(by: { $0.creationDate > $1.creationDate })
+//        toDosCache.sort(by: { !$0.isCompleted && $1.isCompleted })
+//    }
     
     //FIXME: Reconsider this func
-    func deleteToDo(_ toDo: ToDo) {
-        Task {
-            dataManager.deleteToDo(toDo)
-            //await print(aaa.value.count)
-            print("deleting......")
-            getToDos()
-        }
-        
-    
-    }
+//    func deleteToDo(_ toDo: ToDo) {
+//        Task {
+//            dataManager.deleteToDo(toDo)
+//            //await print(aaa.value.count)
+//            print("deleting......")
+//            //getToDos()
+//            toDosCache.removeAll { $0.id == toDo.id }
+//            message = "\(toDo.title) has been deleted!"
+//            showingMessage = true
+//        }
+//        
+//    
+//    }
 }

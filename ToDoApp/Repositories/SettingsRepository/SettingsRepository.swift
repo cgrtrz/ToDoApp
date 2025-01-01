@@ -15,7 +15,7 @@ protocol SettingsRepository {
 
 final class UserDefaultsSettingsRepository: SettingsRepository {
     
-    private let defaultSettings: Settings = Settings(selectedToDoListType: .all, selectedTheme: .purple)
+    private let defaultSettings: Settings = Settings(selectedTheme: .purple)
     
     func createSettings() {
         

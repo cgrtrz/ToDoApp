@@ -13,10 +13,14 @@ struct ToDoToogleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         return HStack {
             Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "checkmark.circle")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
                 .foregroundStyle(configuration.isOn ? Color.green : Color.gray)
-                .frame(width: 32, height:32)
+                .frame(width: 24, height: 24)
                 .onTapGesture {
-                    configuration.isOn.toggle()
+                    //withAnimation {
+                        configuration.isOn.toggle()
+                    //}
                 }
         }
     }

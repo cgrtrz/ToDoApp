@@ -13,7 +13,7 @@ final class RepositoryManager {
     
     //Set repositories to inject into the app.
     private let toDoRepositoryType: ToDoRepositoryType = .coreData
-    private let authenticationRepositoryType: AuthenticationRepositoryType = .mocked
+    //private let authenticationRepositoryType: AuthenticationRepositoryType = .mocked
     private let settingsRepositoryType: SettingsRepositoryType = .userDefaults
     
     func getToDoRepository() -> ToDoRepository {
@@ -27,16 +27,16 @@ final class RepositoryManager {
         }
     }
     
-    func getAuthenticationRepository() -> AuthenticationRepository {
-        switch authenticationRepositoryType {
-        case .mocked:
-            return MockedAuthenticationRepository()
-        case .firebase:
-            return FirebaseAuthenticationRepository()
-        case .apple:
-            return AppleAuthenticationRepository()
-        }
-    }
+//    func getAuthenticationRepository() -> AuthenticationRepository {
+//        switch authenticationRepositoryType {
+//        case .mocked:
+//            return MockedAuthenticationRepository()
+//        case .firebase:
+//            return FirebaseAuthenticationRepository()
+//        case .apple:
+//            return AppleAuthenticationRepository()
+//        }
+//    }
     
     func getSettingsRepository() -> SettingsRepository {
         switch settingsRepositoryType {
