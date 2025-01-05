@@ -40,19 +40,21 @@ final class AddToDoViewModel: ObservableObject {
                                creationDate: Date().timeIntervalSince1970,
                             completionDate: 0,
                             dueDate: dueDate.timeIntervalSince1970,
-                            isCompleted: false, addedToCalendar: addToCalendar)
+                            isCompleted: false, addedToCalendar: addToCalendar, eventId: "", hasDueDate: showingDatePicker)
         } else {
             newToDo = ToDo(title: title, description: description, creationDate: Date().timeIntervalSince1970)
         }
         
-        if addToCalendar {
-            do {
-                try eventManager.addToCalendar(newToDo)
-                newToDo.addedToCalendar = true
-            } catch {
-                print(error)
-            }
-        }
+//        if addToCalendar {
+//            Task {
+//                do {
+//                    try await eventManager.addToCalendar(newToDo)
+//                    newToDo.addedToCalendar = true
+//                } catch {
+//                    print(error)
+//                }
+//            }
+//        }
     }
     
 }

@@ -46,3 +46,13 @@ struct BlueTheme: Theme {
 struct OrangeTheme: Theme {
     var tintColor: Color { .orange }
 }
+
+struct test: View {
+    var body: some View {
+        Themes.purple.colors.tintColor
+        
+    }
+}
+#Preview {
+    test()
+}

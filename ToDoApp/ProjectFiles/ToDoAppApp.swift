@@ -16,15 +16,12 @@ struct ToDoAppApp: App {
     var body: some Scene {
         WindowGroup {
             //ContentView()
-                
-            ToDoListView()
-            
-            //RootView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(DataManager())
-                .environmentObject(SettingsManager())
-                //.environmentObject(ToDoListViewModel())
-                //.environmentObject(AuthenticationManager())
+            NavigationStack {
+                ToDoListView()
+            }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .environmentObject(DataManager())
+            .environmentObject(SettingsManager())
         }
     }
 }

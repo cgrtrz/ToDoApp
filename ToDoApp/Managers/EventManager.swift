@@ -11,49 +11,98 @@ import EventKit
 final class EventManager {
     
     private let eventStore: EKEventStore = EKEventStore()
-    private let reminder: EKReminder
-    
+    //private let reminder: EKReminder
+    private var isEventsAccessGranted: Bool?
+    private var isRemindersAccessGranted: Bool?
     
     init () {
-        reminder = EKReminder(eventStore: eventStore)
+        //reminder = EKReminder(eventStore: eventStore)
     }
     
-    func addToCalendar(_ toDo: ToDo) throws {
-        
-        eventStore.requestFullAccessToEvents() {granted, error in
-            if granted  && error == nil{
-                print("events: good to go...")
-                
-                self.reminder.title = toDo.title
-                self.reminder.isCompleted = toDo.isCompleted
-                self.reminder.addAlarm(EKAlarm(relativeOffset: 15))
-                self.reminder.notes = toDo.description_
-                if Date(timeIntervalSince1970: toDo.dueDate!).distance(to: Date()) < -900 && toDo.dueDate != nil {
-                    self.reminder.dueDateComponents = Calendar.current.dateComponents(
-                        [
-                            .year,
-                            .month,
-                            .day,
-                            .hour,
-                            .minute
-                        ], from: Date(timeIntervalSince1970: toDo.dueDate!))
-                } else {
-                    //TODO: Throw error here...
-                    //throw EventManagerError.invalidDueDate
-                }
-                self.eventStore.requestFullAccessToReminders() {granted, error in
-                    if granted  && error == nil{
-                        print("reminders: good to go...")
-                        self.reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
-                        do {
-                            try self.eventStore.save(self.reminder, commit: true)
-                        } catch {
-                            print(error)
-                        }
-                    }
-                }
+    func requestAccessToCalendar() async {
+        do {
+            try await isEventsAccessGranted = eventStore.requestFullAccessToEvents()
+        } catch {
+            isEventsAccessGranted = false
+        }
+    }
+    
+    func requestAccessToReminder() async {
+        do {
+            try await isRemindersAccessGranted = eventStore.requestFullAccessToReminders()
+        } catch {}
+    }
+    
+    func removeFromCalendar(_ eventId: String) {
+        if let eventToDelete = eventStore.event(withIdentifier: eventId) {
+            do {
+                try eventStore.remove(eventToDelete, span: .thisEvent)
+            } catch {}
+        }
+    }
+    
+    func removeFromReminder(_ reminderId: String) {
+        if let reminderToDelete = eventStore.calendarItem(withIdentifier: reminderId) {
+            do {
+                try eventStore.remove(reminderToDelete as! EKReminder, commit: true)
+            } catch {
+                print(error.localizedDescription)
             }
         }
-       
+    }
+    
+    func addToReminder(_ toDo: ToDo) async throws -> String {
+        
+        if isRemindersAccessGranted == nil {
+            await requestAccessToReminder()
+        }
+        
+        if isRemindersAccessGranted != nil && isRemindersAccessGranted == true {
+            let reminder = EKReminder(eventStore: eventStore)
+            reminder.title = toDo.title
+            reminder.notes = toDo.description_
+            reminder.dueDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date(timeIntervalSince1970: toDo.dueDate ?? 0))
+            reminder.addAlarm(EKAlarm(relativeOffset: -900))
+            reminder.calendar = eventStore.defaultCalendarForNewReminders()
+            
+            do {
+                try eventStore.save(reminder, commit: true)
+                let reminderId = reminder.calendarItemIdentifier
+                return reminderId
+            } catch {
+                return ""
+            }
+        } else {
+            return ""
+        }
+    }
+    
+    func addToCalendar(_ toDo: ToDo) async throws -> String {
+        
+        if isEventsAccessGranted == nil {
+            await requestAccessToCalendar()
+        }
+        
+        if isEventsAccessGranted != nil && isEventsAccessGranted == true {
+            let event = EKEvent(eventStore: eventStore)
+            event.title = toDo.title
+            event.notes = toDo.description_
+            event.startDate = Date(timeIntervalSince1970: toDo.dueDate ?? 0)
+            event.endDate = event.startDate.addingTimeInterval(7200)
+            event.addAlarm(EKAlarm(relativeOffset: -900))
+            event.calendar = eventStore.defaultCalendarForNewEvents
+            
+            do {
+                try eventStore.save(event, span: .thisEvent)
+                let eventId = event.eventIdentifier ?? ""
+                return eventId
+            } catch {
+                //
+                return ""
+            }
+        } else {
+            //
+            return ""
+        }
     }
 }

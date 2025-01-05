@@ -34,7 +34,7 @@ final class CoreDataToDoRepository: ToDoRepository {
                          creationDate: TimeInterval($0.creationDate),
                          completionDate: TimeInterval($0.completionDate),
                          dueDate: TimeInterval($0.dueDate),
-                         isCompleted: $0.isCompleted, addedToCalendar: $0.addedToCalendar) }
+                         isCompleted: $0.isCompleted, addedToCalendar: $0.addedToCalendar, eventId: $0.eventId ?? "", hasDueDate: $0.hasDueDate) }
             }
             catch {
                 print("Error fetching ToDos from Core Data: \(error)")
@@ -54,6 +54,8 @@ final class CoreDataToDoRepository: ToDoRepository {
             newToDo.dueDate = Int64(toDo.dueDate ?? 0.0)
             newToDo.isCompleted = false
             newToDo.addedToCalendar = toDo.addedToCalendar
+            newToDo.eventId = toDo.eventId
+            newToDo.hasDueDate = toDo.hasDueDate
             self.saveContext()
         }
         
@@ -72,7 +74,10 @@ final class CoreDataToDoRepository: ToDoRepository {
                         entity.isCompleted = toDo.isCompleted
                         entity.completionDate = Int64(toDo.completionDate ?? 0)
                         entity.addedToCalendar = toDo.addedToCalendar
+                        entity.eventId = toDo.eventId
+                        entity.hasDueDate = toDo.hasDueDate
                         self.saveContext()
+                        print(entity.eventId ?? "")
                     }
                 } catch {
                     print("Error updating task: \(error)")

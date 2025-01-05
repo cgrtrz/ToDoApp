@@ -34,6 +34,15 @@ struct ToDoRowView: View {
                 .foregroundStyle(toDo.isCompleted ? Color.gray : Color.primary)
                 .strikethrough(toDo.isCompleted)
             Spacer()
+            if toDo.hasDueDate {
+                Image(systemName: "calendar")
+                    .foregroundStyle(Color.secondary)
+            }
+            if toDo.addedToCalendar{
+                Image(systemName: "bell.and.waves.left.and.right.fill")
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.yellow, .secondary)
+            }
             Text(!toDo.isCompleted && toDo.hasDueDate && toDo.overdue ? "!" :"")
                 .foregroundStyle(Color.red)
             

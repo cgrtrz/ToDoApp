@@ -14,7 +14,7 @@ struct HeaderView:View {
             Text("To Do App")
                 .font(.largeTitle)
                 .bold()
-                .foregroundStyle(Constants.gradient)
+                //.foregroundStyle(Constants.gradient)
             Spacer()
         }.padding(.horizontal, 36)
     }

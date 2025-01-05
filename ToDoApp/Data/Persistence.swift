@@ -5,19 +5,79 @@
 //  Created by Cagri Terzi on 12/12/2024.
 //
 
+//import CoreData
+//
+//struct PersistenceController {
+//    static let shared = PersistenceController()
+//
+//    let container: NSPersistentContainer
+//
+//    init() {
+//        container = NSPersistentContainer(name: "ToDoApp")
+//        container.loadPersistentStores { _, error in
+//            if let error = error {
+//                fatalError("Persistent store yüklenirken hata oluştu: \(error.localizedDescription)")
+//            }
+//        }
+//    }
+//}
 import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
 
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
 
     init() {
-        container = NSPersistentContainer(name: "ToDoApp")
-        container.loadPersistentStores { _, error in
+        container = NSPersistentCloudKitContainer(name: "ToDoApp")
+        
+        // Persistent store descriptions oluştur
+        let cloudStoreDescription = NSPersistentStoreDescription(url: URL(fileURLWithPath: "\(NSPersistentContainer.defaultDirectoryURL().path)/CloudStore.sqlite"))
+        cloudStoreDescription.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.tequilatech.TequilaToDoApp")
+        
+        let localStoreDescription = NSPersistentStoreDescription(url: URL(fileURLWithPath: "\(NSPersistentContainer.defaultDirectoryURL().path)/LocalStore.sqlite"))
+        localStoreDescription.cloudKitContainerOptions = nil // Lokal store CloudKit'e bağlanmayacak
+        
+        // Persistent store descriptions ekle
+        container.persistentStoreDescriptions = [cloudStoreDescription, localStoreDescription]
+        
+        // Persistent store'ları yükle
+        container.loadPersistentStores { storeDescription, error in
             if let error = error {
                 fatalError("Persistent store yüklenirken hata oluştu: \(error.localizedDescription)")
             }
+            
+            if let options = storeDescription.cloudKitContainerOptions {
+                print("CloudKit Store Yüklendi: \(options.containerIdentifier)")
+            } else {
+                print("Local Store Yüklendi: \(storeDescription.url?.absoluteString ?? "Unknown URL")")
+            }
         }
+        
+        // Arka plan değişikliklerini ana bağlama yansıt
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 }
+
+
+//import CoreData
+//
+//struct PersistenceController {
+//    static let shared = PersistenceController()
+//
+//    let container: NSPersistentCloudKitContainer
+//
+//    init(inMemory: Bool = false) {
+//        container = NSPersistentCloudKitContainer(name: "BooksDemo")
+//        if inMemory {
+//            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+//        }
+//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//            if let error = error as NSError? {
+//                fatalError("Unresolved error \(error), \(error.userInfo)")
+//            }
+//        })
+//        container.viewContext.automaticallyMergesChangesFromParent = true
+//    }
+//}

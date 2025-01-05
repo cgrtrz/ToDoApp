@@ -24,6 +24,39 @@
         }
       }
     },
+    "%@" : {
+
+    },
+    "%@ has been added!" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ eklendi!"
+          }
+        }
+      }
+    },
+    "%@ has been deleted!" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ silindi!"
+          }
+        }
+      }
+    },
+    "%@ has been updated!" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ güncellendi!"
+          }
+        }
+      }
+    },
     "Access to Calendar" : {
       "localizations" : {
         "tr" : {
@@ -55,6 +88,26 @@
         }
       }
     },
+    "ADD" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EKLE"
+          }
+        }
+      }
+    },
+    "Add date" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih ekle"
+          }
+        }
+      }
+    },
     "Add new" : {
       "localizations" : {
         "tr" : {
@@ -75,7 +128,18 @@
         }
       }
     },
+    "Add to calendar" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takvime Ekle"
+          }
+        }
+      }
+    },
     "Add to Calendar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -85,7 +149,18 @@
         }
       }
     },
+    "ADD TO CALENDAR" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TAKVİME EKLE"
+          }
+        }
+      }
+    },
     "Add to calendar?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -126,6 +201,16 @@
         }
       }
     },
+    "Cancel" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vazgeç"
+          }
+        }
+      }
+    },
     "Change Theme" : {
       "localizations" : {
         "tr" : {
@@ -135,6 +220,9 @@
           }
         }
       }
+    },
+    "Close" : {
+
     },
     "Completed" : {
       "extractionState" : "stale",
@@ -170,10 +258,21 @@
     "Custom Style" : {
 
     },
+    "Date added" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih eklendi"
+          }
+        }
+      }
+    },
     "Default ToDo Type" : {
 
     },
     "Delete" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -193,11 +292,35 @@
         }
       }
     },
+    "Discard changes" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Değişikliklerden vazgeç"
+          }
+        }
+      }
+    },
     "Due date" : {
-
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih"
+          }
+        }
+      }
     },
     "Due Date" : {
-
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih"
+          }
+        }
+      }
     },
     "locAddNew" : {
       "extractionState" : "manual",
@@ -279,11 +402,22 @@
       }
     },
     "Remove" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kaldır"
+          }
+        }
+      }
+    },
+    "REMOVE" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KALDIR"
           }
         }
       }
@@ -298,11 +432,35 @@
         }
       }
     },
-    "Select Theme" : {
-
+    "Save changes" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Değişiklikleri kaydet"
+          }
+        }
+      }
     },
-    "Set Due Date?" : {
-
+    "Select Theme" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema seç"
+          }
+        }
+      }
+    },
+    "Set Due Date" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih ekle"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {
@@ -370,6 +528,9 @@
         }
       }
     },
+    "ToDo App" : {
+
+    },
     "ToDo List is empty" : {
       "localizations" : {
         "tr" : {
@@ -380,12 +541,23 @@
         }
       }
     },
-    "Update Task" : {
+    "UPDATE" : {
       "localizations" : {
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Görevi Güncelle"
+            "value" : "GÜNCELLE"
+          }
+        }
+      }
+    },
+    "Update Task" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Güncelle"
           }
         }
       }

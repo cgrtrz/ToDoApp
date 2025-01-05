@@ -19,14 +19,9 @@ struct ToDo : Identifiable, Equatable, Hashable {
     var dueDate: TimeInterval?
     var isCompleted: Bool = false
     var addedToCalendar: Bool
+    var eventId: String? = ""
     
-    var hasDueDate: Bool {
-        if dueDate != 0 {
-            return true
-        } else {
-            return false
-        }
-    }
+    var hasDueDate: Bool = false
     
     var date: Date {
         return Date(timeIntervalSince1970: dueDate ?? 0)
@@ -47,7 +42,9 @@ struct ToDo : Identifiable, Equatable, Hashable {
         completionDate: TimeInterval,
         dueDate: TimeInterval,
         isCompleted: Bool,
-        addedToCalendar: Bool
+        addedToCalendar: Bool,
+        eventId: String,
+        hasDueDate: Bool
     ) {
         self.id = id
         self.title = title
@@ -57,6 +54,8 @@ struct ToDo : Identifiable, Equatable, Hashable {
         self.dueDate = dueDate
         self.isCompleted = isCompleted
         self.addedToCalendar = addedToCalendar
+        self.eventId = eventId
+        self.hasDueDate = hasDueDate
     }
     init(
         title: String,
