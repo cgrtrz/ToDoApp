@@ -6,20 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		A5D0C57B2D2AF45F005CBD61 /* ToDoAppWatchOS Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A5D0C56E2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A5D0C5792D2AF45F005CBD61 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A57E461E2D03248400C0CE72 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A5D0C56D2D2AF45D005CBD61;
-			remoteInfo = "ToDoAppWatchOS Watch App";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		A5D0C57C2D2AF45F005CBD61 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -27,7 +13,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				A5D0C57B2D2AF45F005CBD61 /* ToDoAppWatchOS Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,7 +21,6 @@
 
 /* Begin PBXFileReference section */
 		A57E46262D03248400C0CE72 /* ToDoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5D0C56E2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoAppWatchOS Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -46,13 +30,6 @@
 				Info.plist,
 			);
 			target = A57E46252D03248400C0CE72 /* ToDoApp */;
-		};
-		A5D0C5832D2AFB76005CBD61 /* Exceptions for "ToDoAppWatchOS Watch App" folder in "ToDoAppWatchOS Watch App" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"ToDoAppWatchOS-Watch-App-Info.plist",
-			);
-			target = A5D0C56D2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -65,25 +42,10 @@
 			path = ToDoApp;
 			sourceTree = "<group>";
 		};
-		A5D0C56F2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				A5D0C5832D2AFB76005CBD61 /* Exceptions for "ToDoAppWatchOS Watch App" folder in "ToDoAppWatchOS Watch App" target */,
-			);
-			path = "ToDoAppWatchOS Watch App";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A57E46232D03248400C0CE72 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A5D0C56B2D2AF45D005CBD61 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -97,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				A57E46282D03248400C0CE72 /* ToDoApp */,
-				A5D0C56F2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App */,
 				A57E46272D03248400C0CE72 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				A57E46262D03248400C0CE72 /* ToDoApp.app */,
-				A5D0C56E2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,7 +86,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A5D0C57A2D2AF45F005CBD61 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A57E46282D03248400C0CE72 /* ToDoApp */,
@@ -136,28 +95,6 @@
 			);
 			productName = ToDoApp;
 			productReference = A57E46262D03248400C0CE72 /* ToDoApp.app */;
-			productType = "com.apple.product-type.application";
-		};
-		A5D0C56D2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A5D0C57F2D2AF45F005CBD61 /* Build configuration list for PBXNativeTarget "ToDoAppWatchOS Watch App" */;
-			buildPhases = (
-				A5D0C56A2D2AF45D005CBD61 /* Sources */,
-				A5D0C56B2D2AF45D005CBD61 /* Frameworks */,
-				A5D0C56C2D2AF45D005CBD61 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				A5D0C56F2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App */,
-			);
-			name = "ToDoAppWatchOS Watch App";
-			packageProductDependencies = (
-			);
-			productName = "ToDoAppWatchOS Watch App";
-			productReference = A5D0C56E2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -172,9 +109,6 @@
 				TargetAttributes = {
 					A57E46252D03248400C0CE72 = {
 						CreatedOnToolsVersion = 16.1;
-					};
-					A5D0C56D2D2AF45D005CBD61 = {
-						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
@@ -194,20 +128,12 @@
 			projectRoot = "";
 			targets = (
 				A57E46252D03248400C0CE72 /* ToDoApp */,
-				A5D0C56D2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A57E46242D03248400C0CE72 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A5D0C56C2D2AF45D005CBD61 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -224,22 +150,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5D0C56A2D2AF45D005CBD61 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A5D0C57A2D2AF45F005CBD61 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A5D0C56D2D2AF45D005CBD61 /* ToDoAppWatchOS Watch App */;
-			targetProxy = A5D0C5792D2AF45F005CBD61 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A57E46372D03248600C0CE72 /* Debug */ = {
@@ -433,70 +344,6 @@
 			};
 			name = Release;
 		};
-		A5D0C57D2D2AF45F005CBD61 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "ToDoAppWatchOS Watch App/ToDoAppWatchOS Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToDoAppWatchOS Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 89VFNKJCG8;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ToDoAppWatchOS-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = ToDoAppWatchOS;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.tequilatech.TequilaToDoApp;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tequilatech.TequilaToDoApp.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Debug;
-		};
-		A5D0C57E2D2AF45F005CBD61 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "ToDoAppWatchOS Watch App/ToDoAppWatchOS Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToDoAppWatchOS Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 89VFNKJCG8;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ToDoAppWatchOS-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = ToDoAppWatchOS;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.tequilatech.TequilaToDoApp;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tequilatech.TequilaToDoApp.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -514,15 +361,6 @@
 			buildConfigurations = (
 				A57E463A2D03248600C0CE72 /* Debug */,
 				A57E463B2D03248600C0CE72 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A5D0C57F2D2AF45F005CBD61 /* Build configuration list for PBXNativeTarget "ToDoAppWatchOS Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A5D0C57D2D2AF45F005CBD61 /* Debug */,
-				A5D0C57E2D2AF45F005CBD61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
