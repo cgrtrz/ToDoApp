@@ -125,7 +125,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "appicon.jpg",
+      "filename" : "icon.svg",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -136,7 +136,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "appicon 1.jpg",
+      "filename" : "icon 1.svg",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -147,7 +147,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "appicon-dark.jpg",
+      "filename" : "icon 2.svg",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -158,7 +158,7 @@
           "value" : "high"
         }
       ],
-      "filename" : "appicon-dark 1.jpg",
+      "filename" : "icon 3.svg",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -173,7 +173,7 @@
           "value" : "high"
         }
       ],
-      "filename" : "appicon-dark 2.jpg",
+      "filename" : "icon 4.svg",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -188,7 +188,7 @@
           "value" : "high"
         }
       ],
-      "filename" : "appicon-dark 3.jpg",
+      "filename" : "icon 5.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }

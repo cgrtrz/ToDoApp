@@ -47,7 +47,7 @@ struct ToDoListView: View {
                             
                         }
                         .toolbar {
-                            SettingsToolbarButton()
+                            //SettingsToolbarButton()
                         }
                         .navigationTitle("ToDo App")
                     //2nd View in ZStack, shown if ToDo list is empty.
