@@ -45,4 +45,5 @@ This project is licensed under the MIT License.
 
 Got questions, feedback, or just want to connect? Feel free to reach out!
 
-📧 Email: cagri_terzi@hotmail.com
+📧 Email: <a href = "mailto:cagri_terzi@hotmail.com"> cagri_terzi@hotmail.com </a>
+💻 GitHub <a href = "https://github.com/cgrtrz"> @cgrtrz </a>
