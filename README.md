@@ -1,4 +1,7 @@
-# 📌  ToDo App
+<p>
+  <img src = "Frame 1.png" width = "42">
+  <h1>ToDo App</h1>
+</p>
 
 Welcome to ToDoApp – a simple, intuitive, and powerful task management app built with SwiftUI and MVVM architecture. Stay organized, boost productivity, and conquer your daily goals with ease. Designed for simplicity and efficiency, ToDoApp keeps your tasks at your fingertips without compromising your privacy.
 
@@ -46,4 +49,5 @@ This project is licensed under the MIT License.
 Got questions, feedback, or just want to connect? Feel free to reach out!
 
 📧 Email: <a href = "mailto:cagri_terzi@hotmail.com"> cagri_terzi@hotmail.com </a>
+
 💻 GitHub <a href = "https://github.com/cgrtrz"> @cgrtrz </a>
